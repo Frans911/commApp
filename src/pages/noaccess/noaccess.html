@@ -1,0 +1,90 @@
+<!--
+  Generated template for the NoaccessPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title text-center>News Feeds</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+   <!-- The Card -->
+   <ion-card *ngFor="let feed of feeds" class="ion">
+
+      <ion-item class="clr">
+        <ion-avatar item-start>
+          <!-- <img src="http://cdn.24.co.za/files/Cms/General/d/6559/{{ data?.articles[0].urlToImage }}.png"> -->
+          <img src='./assets/imgs/news24.jpg'>
+        </ion-avatar>
+        <h2>Published by News24</h2>
+        <p><small class="fontC">{{ feed.publishedAt }}</small></p>
+      </ion-item>
+  
+      <ion-card-content>
+        <ion-row>
+          <ion-col align-self-center text-center>
+              <img style="border-radius: 5px"  src="{{ feed.urlToImage }}"  height="150px" width="150px">
+          </ion-col>
+        </ion-row>
+        <ion-card-title>
+          {{ feed.title }}
+        </ion-card-title>
+        <p class="fontC">{{ feed.description}}</p>
+      </ion-card-content>
+  
+      <!-- <ion-row class="padUp">
+        <ion-col align-self-center text-center>
+          <ion-note>
+            <small>By staff reporter</small>
+          </ion-note>
+        </ion-col>
+  
+        <ion-col align-self-center text-cente>
+         <ion-note> <small>{{ timeAgo }}</small></ion-note>
+        </ion-col>
+  
+        <ion-col>
+          <button ion-button color="primary" clear small icon-start (click)="news24(feed.url)">
+            <ion-icon name='text'></ion-icon>
+            
+            read more
+          </button>
+  
+        </ion-col>
+      </ion-row> -->
+
+      <div class="one">
+          <ion-note>
+              <small>By staff reporter</small>
+            </ion-note>
+        <div class="two">
+            <ion-note> <small>{{ timeAgo }}</small></ion-note></div>
+          <div class="three">
+              <button ion-button color="primary" clear small icon-start (click)="news24(feed.url)">
+                  <ion-icon name='text'></ion-icon>
+                  
+                  read more
+                </button>
+          </div>
+        
+      </div>
+    </ion-card>
+  
+    <!-- //Refresher -->
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="bubbles" refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+  
+    <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+</ion-content>

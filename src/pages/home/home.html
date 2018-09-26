@@ -1,0 +1,114 @@
+<ion-header no-border no-shadow>
+  <ion-navbar text-center color="alpha" >
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title >Home</ion-title>
+        <div *ngIf = "adminBtn == 2">
+       
+          <!-- <div style="transform: translate(245px,-10px)">{{username}}</div> -->
+        </div>
+      <!-- <span style="transform: translateX(45px)" >
+        Admin
+      </span> -->
+      <div  *ngIf = "adminBtn == 1" (click)="admin()">
+        <ion-title text-cente style="transform: translate(85px,-10px)">Admin</ion-title>
+
+      </div>
+  
+  
+</ion-navbar>
+ 
+</ion-header>
+
+<ion-content padding class="body">
+  
+  <!-- <ion-list>
+    <ion-item class="list">
+      <strong>Status:</strong> {{ data?.status}}
+      
+    </ion-item>
+
+    <ion-item>
+      <strong>Title:</strong> {{ data?.articles[0].title}}
+    </ion-item>
+    <ion-item>
+      <strong>Date:</strong> {{ data?.articles[0].publishedAt}}
+    </ion-item>
+    <ion-item>
+      <strong>Url:</strong> {{ data?.articles[0].url}} staff reporter. published 25 aug 2018 @ time
+    </ion-item>
+
+    <ion-item>
+      <div class="icon">
+        <img src='http://cdn.24.co.za/files/Cms/General/d/1790/{{ data?.articles[0].urlToImage }}.gif' width="150" height="150">
+      </div>
+    </ion-item>
+  </ion-list> -->
+  <!-- <ion-item>
+    <ion-label floating>URL</ion-label>
+    <ion-input type="url" [(ngModel)]="url"></ion-input>
+  </ion-item>
+
+  <button ion-button block clear (click)="openWebpage(url)">Open Webpage</button> -->
+
+  <!-- The Card -->
+  <ion-card style="border-radius: 5px" *ngFor="let feed of feeds" color="alpha" class="ion">
+
+    <ion-item class="clr" color="alphablack">
+      <ion-avatar item-start>
+        <!-- <img src="http://cdn.24.co.za/files/Cms/General/d/6559/{{ data?.articles[0].urlToImage }}.png"> -->
+        <img src='./assets/imgs/news24.jpg'>
+      </ion-avatar>
+      <h2>Published by News24</h2>
+      <p><small class="fontC">{{ feed.publishedAt }}</small></p>
+    </ion-item>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col align-self-center text-center>
+          <div>
+            <img style="border-radius: 5px" src="{{ feed?.urlToImage }}"  height="250">
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-card-title>
+       <p style="font-weight: bold">{{ feed.title }}</p> 
+      </ion-card-title>
+      <p style="font-size: 10pt" class="fontC">{{ feed.description}}</p>
+    </ion-card-content>
+
+    <ion-row class="padUp">
+      <ion-col align-self-center text-center>
+        <ion-note>
+          <small style="color: black">By staff reporter</small>
+        </ion-note>
+      </ion-col>
+
+      <ion-col align-self-center text-cente>
+       <ion-note> <small style="color: black">{{ timeAgo }}</small></ion-note>
+      </ion-col>
+
+      <ion-col>
+        <button ion-button color="primary" clear small icon-start (click)="news24(feed.url)">
+          <ion-icon name='text'></ion-icon>
+          <!-- <a href="{{ feed.url }}">Read more..</a> -->
+          read more
+        </button>
+
+      </ion-col>
+      
+    </ion-row>
+  </ion-card>
+
+  <!-- //Refresher -->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="bubbles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>

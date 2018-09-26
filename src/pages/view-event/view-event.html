@@ -1,0 +1,74 @@
+<!--
+  Generated template for the ViewEventPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar text-center color="calm">
+
+    <ion-title text-center  >Events
+      <span style="float: right; font-size: 14px; padding: 1.4%;border: 1px solid #FFC107;border-radius: 5px " (click)="presentPopover($event)">
+        Category &ensp; <ion-icon style="transform: translateY(2px)" name="more"></ion-icon>
+
+      </span>
+
+    </ion-title>
+
+
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="body" text-center>
+
+  <ion-card style="background: rgba(255, 255, 255, .5);border-radius: 5px" *ngFor="let event of categoryList" (click)="eventDetails(event)">
+    <img src="{{event?.downloadUrl}}" width="140px" height="170px" *ngIf = "event.downloadUrl != 'none'"/>
+    <img src="../../assets/imgs/logo.jpg" width="140px" height="170px" *ngIf = "event.downloadUrl == 'none'"/>
+    <ion-card-content>
+      <ion-card-title style="font-weight: bold">
+        {{event?.EventName}}
+      </ion-card-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="font-weight: bold">
+            Event Date :   {{event?.EventDate}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="font-weight: bold">
+            Event Time : {{event?.EventTime}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <ion-list>
+    <ion-item *ngFor = "let event of categoryList" (click)="eventDetails(event)">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img src="{{event?.downloadUrl}}" height="25" width="25">
+          </ion-col>
+          <ion-col>
+            {{event?.EventName}}
+          </ion-col>
+          <ion-col>{{event?.eventVenue}}</ion-col>
+          <ion-col>
+            Date: {{event?.EventDate}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list> -->
+  <ion-fab right bottom (click)="addEvent()">
+    <button ion-fab color="danger">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
