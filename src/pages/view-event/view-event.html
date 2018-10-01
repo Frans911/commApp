@@ -7,7 +7,9 @@
 <ion-header>
 
   <ion-navbar text-center color="calm">
-
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
     <ion-title text-center  >Events
       <span style="float: right; font-size: 14px; padding: 1.4%;border: 1px solid #FFC107;border-radius: 5px " (click)="presentPopover($event)">
         Category &ensp; <ion-icon style="transform: translateY(2px)" name="more"></ion-icon>
@@ -15,10 +17,6 @@
       </span>
 
     </ion-title>
-
-
-
-
   </ion-navbar>
 
 </ion-header>

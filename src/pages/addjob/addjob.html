@@ -14,25 +14,26 @@
 
 
   <ion-content padding class="body" text-center>
+    <form [formGroup]="jobsForm" (ngSubmit)="saveImgToFireStorage(jobsForm)">
     <ion-list>
       <ion-item>
         <ion-label style="font-size: 10pt;color: white" floating>Job Descrioption</ion-label>
-        <ion-input type="text" [(ngModel)]="eventName"></ion-input>
+        <ion-input type="text" formControlName="JobDescp"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label style="font-size: 10pt;color: white" floating>Location/City</ion-label>
-          <ion-input type="text" [(ngModel)]="eventVenue"></ion-input>
+          <ion-input type="text" formControlName="location"></ion-input>
         </ion-item>
       <ion-item>
         
-        <ion-input type="text" [(ngModel)]="eventDate" ></ion-input>
+        <!-- <ion-input type="text" formControlName="closingDate" ></ion-input> -->
         <ion-label style="font-size: 10pt;color: white" floating>Closing Date </ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" formControlName="closingDate" ></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label style="font-size: 10pt;color: white" floating>Job Caterory</ion-label>
-        <ion-select [(ngModel)]="category">
+        <ion-select formControlName="category">
           <ion-option value="sc">Freelancer</ion-option>
           <ion-option value="ts">Plumber</ion-option>
           <ion-option value="ei">Gardner boy</ion-option>
@@ -73,8 +74,8 @@
         </ion-col> -->
       </ion-row>
     </ion-grid>
-    <button class="btnSign" ion-button full (click)="saveImgToFireStorage()" >Add Job</button>
-
+    <button class="btnSign" [disabled]="!jobsForm.valid" ion-button full >Add Job</button>
+    </form>
     <!--<img [src]="selectedImage" *ngIf="selectedImage">-->
     <!--<img src="{{selectedImage}}" *ngIf="selectedImage">-->
   </ion-content>

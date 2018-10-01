@@ -146,6 +146,15 @@ export class ViewEventPage {
               
             }
           }
+        }else if(popoverData.name == 'Other'){
+          this.categoryList = [];
+
+          for (let event of this.eventsList) {
+            if(event.EventCategory == 'other'){
+              this.categoryList.push(event);
+              
+            }
+          }
         }
       } catch (error) {
         console.log("No item selected");

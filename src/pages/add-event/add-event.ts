@@ -1,3 +1,4 @@
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform, LoadingController, ToastController } from 'ionic-angular';
 import { Camera,CameraOptions,PictureSourceType  } from '@ionic-native/camera';
@@ -13,11 +14,11 @@ declare var firebase
   templateUrl: 'add-event.html',
 })
 export class AddEventPage {
-  eventName;
-  eventDate;
-  eventTime;
-  category;
-  eventVenue;
+  // eventName;
+  // eventDate;
+  // eventTime;
+  // category;
+  // eventVenue;
   selectedImage: string;
 
   fire={
@@ -29,12 +30,23 @@ export class AddEventPage {
   //user
   //userObj;
 
+  eventForm: FormGroup;
 
-  constructor(private toastCtrl: ToastController,public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, private camera: Camera,private platform:Platform,private filePath: FilePath,private f:File) {
+
+  constructor(private toastCtrl: ToastController,public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, private camera: Camera,private platform:Platform,private filePath: FilePath,private f:File, public formBuilder: FormBuilder) {
     //this.firebaseUploads = firebase.database().ref('/fireuploads/');
    // this.firebaseUploads = firebase.database().ref('/fireuploads/');
    /*console.log("Add Event user ID = "+UserObj[0].authentication_UID);
    this.userObj = UserObj[0].authentication_UID;*/
+
+   this.eventForm = this.formBuilder.group({
+    eventName: ['', Validators.required],
+    eventVenue: ['', Validators.required],
+    eventDate: ['', Validators.required],
+    eventTime: ['',Validators.required],
+    category: ['', Validators.required]
+    
+  });
 
   }
 
@@ -138,7 +150,7 @@ export class AddEventPage {
 
   }
 
-  saveImgToFireStorage(){
+  saveImgToFireStorage(eventForm){
     //loading bar
     let loading = this.loadingCtrl.create({
       content: 'Please wait...',
@@ -178,7 +190,7 @@ export class AddEventPage {
           this.fire.downloadUrl = url;
           console.log(url);
           //this.firebaseUploads.push({downloadUrl: url,Admin_Authentication_UID :this.userObj[0].authentication_UID,EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
-          firebase.database().ref('/Events/').push({downloadUrl: this.fire.downloadUrl,EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
+          firebase.database().ref('/Events/').push({downloadUrl: this.fire.downloadUrl,EventName:this.eventForm.value.eventName,eventVenue:this.eventForm.value.eventVenue, EventDate: this.eventForm.value.eventDate,EventTime: this.eventForm.value.eventTime, EventCategory: this.eventForm.value.category});
           this.navCtrl.setRoot("ViewEventPage");
           return this.fire.downloadUrl;
 
@@ -218,7 +230,7 @@ export class AddEventPage {
     }else{
     //   this.pic_available=false
     //  var noPic = this.pic_available;
-      firebase.database().ref('/Events/').push({downloadUrl: 'none',EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
+      firebase.database().ref('/Events/').push({downloadUrl: 'none',EventName:this.eventForm.value.eventName,eventVenue:this.eventForm.value.eventVenue, EventDate: this.eventForm.value.eventDate,EventTime: this.eventForm.value.eventTime, EventCategory: this.eventForm.value.category});
       this.navCtrl.push("ViewEventPage");
     }
   }
