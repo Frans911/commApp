@@ -6,6 +6,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoginPage } from '../login/login';
 import { UserObj } from '../../models/loggedInUser.mock';
 import { sideMenuObj } from '../../models/sideMenuPages.mocks';
+import { userProfileObj } from '../../models/userProfile.mocks';
 
 
 
@@ -65,7 +66,7 @@ export class RegisterPage {
     firebase.auth().createUserWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(data => {
       data.user.updateProfile({
         displayName:this.todo.value.fullName,
-        photoURL:'../../assets/imgs/empty.jpg'
+        photoURL:'./assets/imgs/empty.jpg'
       });
 
       console.log(this.todo.value.email);
@@ -87,6 +88,14 @@ export class RegisterPage {
       ).key;
 
       console.log("Key " + databaseKey)
+      var user = firebase.auth().currentUser;
+      userProfileObj.pop();
+              let userProfile = [
+                {username:user.displayName,photoURL:user.photoURL}
+              ]
+              userProfile.forEach(element => {
+                userProfileObj.push(element);
+              })
      
     },
     error => {

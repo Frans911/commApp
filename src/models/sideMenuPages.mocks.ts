@@ -12,6 +12,7 @@ import { HomePage } from "../pages/home/home";
     {icon: 'log-in',title: 'Sign In', component: 'LoginPage'}
   ];
 
+
  export const sideMenuObj = pages; 
 // this.pages = [
 //     { icon: 'home', title: 'Home', component: HomePage },

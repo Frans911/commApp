@@ -6,7 +6,7 @@ import { HomePopoverComponent } from './../components/home-popover/home-popover'
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, NavController } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 
@@ -18,7 +18,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { HomePage } from '../pages/home/home';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { JobspopoverComponent } from '../components/jobspopover/jobspopover';
-
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -29,8 +29,10 @@ import { JobspopoverComponent } from '../components/jobspopover/jobspopover';
     FeedComponent
   ],
   imports: [
+    
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     HttpClientModule
   ],
   bootstrap: [IonicApp],
@@ -49,6 +51,7 @@ import { JobspopoverComponent } from '../components/jobspopover/jobspopover';
     NewsProvider, 
     InAppBrowser,
     TextToSpeech,
+    
     Camera,
     File,
     FilePath

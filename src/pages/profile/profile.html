@@ -1,0 +1,49 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar text-center color="calm">
+    <ion-icon name="arrow-back"  (click)="backToHome()"  ></ion-icon>
+    <ion-title>My Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content text-center class="body">
+    
+        <img src="{{user?.photoURL}}"  style="border-radius: 250px; margin: 15px 0 0 0" height="150" width="150">
+        <ion-icon ios="ios-camera" md="md-camera" name="ios-camera" (click)="updateProfilePic()"></ion-icon>
+   <h2 text-center>{{currentUser?.val().fullName}}</h2>
+<ion-list>
+            <ion-item>
+              <h2>Full Name</h2>
+              <p>{{currentUser?.val().fullName}}</p>
+            </ion-item>
+            <ion-item>
+              <h2>Phone Number</h2>
+              <p>{{currentUser?.val().Number}}</p>
+            </ion-item>
+            
+          </ion-list>
+
+    <!-- <ion-card style="background: rgba(255, 255, 255, .5);border-radius: 5px">
+      <img style="border-radius: 950px;margin: 15px 0 0 0" src="./assets/imgs/logo.jpg" height="150" width="200">
+      
+      <ion-card-content>
+     
+      
+       
+
+          
+        
+      </ion-card-content>
+    </ion-card> -->
+
+    <!-- <button ion-button (click)="backToHome()">Home</button> -->
+
+</ion-content>

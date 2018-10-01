@@ -67,8 +67,7 @@ export class HomePage {
 
       
         console.log('HomeePage has loaded.. ');
-        this.apiData.getApiData().subscribe(apidata => {
-          console.log(apidata);
+        this.apiData.getApiData().subscribe(apidata => { 
           this.data = apidata;
           //this.feeds.push(this.data);
           for (var i = 0; i < 10; i++) {
@@ -76,13 +75,11 @@ export class HomePage {
             this.data.articles[i].publishedAt = new Date().toDateString().substr(11, 6);
             var nn = this.data.articles[i].publishedAt;
 
-            this.data.articles[i].publishedAt = new Date().toDateString().substr(0, 10) + ', ' + nn;
-            console.log(this.data.articles[i].description);
+            this.data.articles[i].publishedAt = new Date().toDateString().substr(0, 10) + ', ' + nn; 
           }
         });
 
-        this.apiData.getW().subscribe(apidata => {
-          console.log(apidata);
+        this.apiData.getW().subscribe(apidata => { 
         });
   }
 

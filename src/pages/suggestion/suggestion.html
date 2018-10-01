@@ -70,8 +70,8 @@
         <img src="{{suggestion?.profilepic}}"> 
       </ion-avatar>
       <h2>{{suggestion?.username}}</h2>
-      <p>{{ suggestion?.postedDate }}<b><span style="float:right; color:rgb(0, 17, 255);" (click)="Report()">Report</span></b></p>
-      
+      <!-- <p>{{ suggestion?.postedDate }}<b><span style="float:right; color:rgb(0, 17, 255);" (click)="Report()">Report</span></b></p> -->
+      <p>{{ suggestion?.postedDate }}</p>
     </ion-item>
   
     <ion-card-content>
@@ -91,9 +91,9 @@
           <div (click)="dislike(suggestion)">{{suggestion?.dislikes.length}} Dislikes</div>
         </button>
       </ion-col>
-      <ion-col center text-center  >
+      <ion-col center text-center  style="transform: translateY(9px)">
         <ion-note style="color:black">
-          {{suggestion?.postedtime }} &ensp; {{suggestion?.postedDateTime }} &ensp; <ion-icon style="font-size:20pt;transform: translateY(5px)"  name="volume-up" (click)="Speak(suggestion)"></ion-icon> 
+        <a style="color:black;">{{suggestion?.postedtime }} </a><ion-icon style="font-size:15pt;transform: translateY(5px)"  name="volume-up" (click)="Speak(suggestion)"></ion-icon> 
         </ion-note>
       </ion-col>
     </ion-row>
