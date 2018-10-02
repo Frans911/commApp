@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, LoadingController, AlertController } from 'ionic-angular';
 import { EventDetailsPage } from '../event-details/event-details';
 import { HomePopoverComponent } from '../../components/home-popover/home-popover';
 
@@ -16,7 +16,7 @@ export class ViewEventPage {
   eventsList = [];
   categoryList=[];
 
-  constructor(public loadingCtrl: LoadingController ,public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
+  constructor(public loadingCtrl: LoadingController ,public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController,private alertCtrl: AlertController) {
     
   }
 
@@ -44,7 +44,8 @@ export class ViewEventPage {
         /*this.item._key = snap.key;
         this.item.name = snap.val().c_itemName;*/
         //Adding Item to itemsList
-        this.eventsList.push({_key : snap.key, EventCategory: snap.val().EventCategory, EventDate: snap.val().EventDate, EventName : snap.val().EventName, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl});
+        console.log(snap.val().EventTime)
+        this.eventsList.push({_key : snap.key, EventCategory: snap.val().EventCategory, EventDate: snap.val().EventDate, EventName : snap.val().EventName, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl, eventDescp:snap.val().eventDescp, eventVenue: snap.val().eventVenue});
        console.log(snap.val().downloadUrl);
        console.log(this.eventsList);
         return false;
@@ -169,5 +170,15 @@ export class ViewEventPage {
     this.navCtrl.push("EventDetailsPage",{event:event});
   }
 
+  presentAlert(event) {
+    console.log(event.downloadUrl);
+    let alert = this.alertCtrl.create({
+      cssClass: 'imgAlert',
+      title: ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+event.EventName,
+      subTitle: '<img src="'+event.downloadUrl+'" width="100%" height="100%" />'+'<br>'+event.eventDescp,
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 
 }

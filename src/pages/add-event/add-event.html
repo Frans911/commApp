@@ -25,6 +25,14 @@
     </div>
 
     <ion-item>
+      <ion-label style="font-size: 10pt;color: white" floating>Event Descrioption</ion-label>
+      <ion-input type="text" formControlName="eventDescp"></ion-input>
+    </ion-item>
+    <div class="error" *ngIf="eventForm.get('eventDescp').hasError('required') && eventForm.get('eventDescp').touched">
+      <p style="font-size: 10pt;color: #F44336"><b>Please enter valid event descrioption</b></p> 
+    </div>
+
+    <ion-item>
         <ion-label style="font-size: 10pt;color: white" floating>Event Venue</ion-label>
         <ion-input type="text" formControlName="eventVenue" [class.error1]="!eventForm.controls.eventVenue.valid && eventForm.controls.eventVenue.dirty"></ion-input>
       </ion-item>

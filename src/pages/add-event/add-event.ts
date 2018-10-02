@@ -41,6 +41,7 @@ export class AddEventPage {
 
    this.eventForm = this.formBuilder.group({
     eventName: ['', Validators.required],
+    eventDescp: ['', Validators.required],
     eventVenue: ['', Validators.required],
     eventDate: ['', Validators.required],
     eventTime: ['',Validators.required],
@@ -190,7 +191,7 @@ export class AddEventPage {
           this.fire.downloadUrl = url;
           console.log(url);
           //this.firebaseUploads.push({downloadUrl: url,Admin_Authentication_UID :this.userObj[0].authentication_UID,EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
-          firebase.database().ref('/Events/').push({downloadUrl: this.fire.downloadUrl,EventName:this.eventForm.value.eventName,eventVenue:this.eventForm.value.eventVenue, EventDate: this.eventForm.value.eventDate,EventTime: this.eventForm.value.eventTime, EventCategory: this.eventForm.value.category});
+          firebase.database().ref('/Events/').push({downloadUrl: this.fire.downloadUrl,EventName:this.eventForm.value.eventName,eventDescp: this.eventForm.value.eventDescp,eventVenue:this.eventForm.value.eventVenue, EventDate: this.eventForm.value.eventDate,EventTime: this.eventForm.value.eventTime, EventCategory: this.eventForm.value.category});
           this.navCtrl.setRoot("ViewEventPage");
           return this.fire.downloadUrl;
 
@@ -230,7 +231,7 @@ export class AddEventPage {
     }else{
     //   this.pic_available=false
     //  var noPic = this.pic_available;
-      firebase.database().ref('/Events/').push({downloadUrl: 'none',EventName:this.eventForm.value.eventName,eventVenue:this.eventForm.value.eventVenue, EventDate: this.eventForm.value.eventDate,EventTime: this.eventForm.value.eventTime, EventCategory: this.eventForm.value.category});
+      firebase.database().ref('/Events/').push({downloadUrl: 'none',EventName:this.eventForm.value.eventName,eventDescp: this.eventForm.value.eventDescp,eventVenue:this.eventForm.value.eventVenue, EventDate: this.eventForm.value.eventDate,EventTime: this.eventForm.value.eventTime, EventCategory: this.eventForm.value.category});
       this.navCtrl.push("ViewEventPage");
     }
   }

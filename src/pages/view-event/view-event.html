@@ -24,9 +24,10 @@
 
 <ion-content class="body" text-center>
 
-  <ion-card style="background: rgba(255, 255, 255, .5);border-radius: 5px" *ngFor="let event of categoryList" (click)="eventDetails(event)">
-    <img src="{{event?.downloadUrl}}" width="140px" height="170px" *ngIf = "event.downloadUrl != 'none'"/>
-    <img src="../../assets/imgs/logo.jpg" width="140px" height="170px" *ngIf = "event.downloadUrl == 'none'"/>
+   <!--(click)="eventDetails(event)"-->
+  <ion-card style="background: rgba(255, 255, 255, .5);border-radius: 5px" *ngFor="let event of categoryList" >
+    <img src="{{event?.downloadUrl}}" width="100%"  height="55%"  *ngIf = "event.downloadUrl != 'none'" (click) = "presentAlert(event)"/>
+    <img src="../../assets/imgs/logo.jpg" width="100%" height="55%" *ngIf = "event.downloadUrl == 'none'"/>
     <ion-card-content>
       <ion-card-title style="font-weight: bold">
         {{event?.EventName}}
@@ -38,6 +39,11 @@
           </ion-col>
         </ion-row>
         <ion-row>
+            <ion-col style="font-weight: bold">
+              Event Venue :   {{event?.eventVenue}}
+            </ion-col>
+          </ion-row>
+        <ion-row>
           <ion-col style="font-weight: bold">
             Event Time : {{event?.EventTime}}
           </ion-col>
@@ -46,24 +52,8 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- <ion-list>
-    <ion-item *ngFor = "let event of categoryList" (click)="eventDetails(event)">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <img src="{{event?.downloadUrl}}" height="25" width="25">
-          </ion-col>
-          <ion-col>
-            {{event?.EventName}}
-          </ion-col>
-          <ion-col>{{event?.eventVenue}}</ion-col>
-          <ion-col>
-            Date: {{event?.EventDate}}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-  </ion-list> -->
+
+  
   <ion-fab right bottom (click)="addEvent()">
     <button ion-fab color="danger">
       <ion-icon name="add"></ion-icon>

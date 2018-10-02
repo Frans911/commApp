@@ -5,9 +5,11 @@ page-view-event {
     //  .EventBody ion-item{
     //     background-color: #2794D2;
     //  }
+    
 
     ion-card{
         height: 45%;
+        //height: auto;
         position: relative;
 
     }
@@ -31,6 +33,7 @@ page-view-event {
         background: none;
     }
 }
+
 
 
 // @media all and (min-width:960px) and (max-width: 1024px) { /* put your css styles in here / }
