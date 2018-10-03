@@ -75,6 +75,7 @@ export class LoginPage {
               pages.forEach(element => {
                 sideMenuObj.push(element)
               })
+              
               this.navCtrl.setRoot(HomePage);
             } else if (snap.val().role == 'user') {
               this.userSuccess = true;
@@ -97,6 +98,7 @@ export class LoginPage {
               // let userProfile = [
               //   {username:user.}
               // ]
+              
               this.navCtrl.setRoot(HomePage);
               
             }else{

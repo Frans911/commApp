@@ -191,7 +191,7 @@ export class ViewjobsPage {
     let alert = this.alertCtrl.create({
       cssClass: 'imgAlert',
       title: ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+category,
-      subTitle: '<img src="'+event.downloadUrl+'" width="100%" height="100%" />'+'<br>'+event.EventName,
+      subTitle: '<img src="'+event.downloadUrl+'" width="100%" height="100%" />'+'<br><br>'+event.EventName,
       buttons: ['Dismiss']
     });
     alert.present();

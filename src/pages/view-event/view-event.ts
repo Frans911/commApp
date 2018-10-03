@@ -175,7 +175,7 @@ export class ViewEventPage {
     let alert = this.alertCtrl.create({
       cssClass: 'imgAlert',
       title: ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+event.EventName,
-      subTitle: '<img src="'+event.downloadUrl+'" width="100%" height="100%" />'+'<br>'+event.eventDescp,
+      subTitle: '<img src="'+event.downloadUrl+'" width="100%" height="100%" />'+'<br><br>'+event.eventDescp,
       buttons: ['Dismiss']
     });
     alert.present();
