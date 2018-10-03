@@ -1,7 +1,7 @@
 import { HomePage } from './../home/home';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoginPage } from '../login/login';
 import { UserObj } from '../../models/loggedInUser.mock';
@@ -25,7 +25,7 @@ declare var firebase;
 export class RegisterPage {
   todo: FormGroup;
   userSuccess: false ;
-  constructor(public loadingCtrl:LoadingController, public alertCtrl: AlertController,public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
+  constructor(public loadingCtrl:LoadingController, public alertCtrl: AlertController,public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,private toastCtrl:ToastController) {
 
     this.todo = this.formBuilder.group({
       email: ['', Validators.compose([Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
@@ -63,17 +63,24 @@ export class RegisterPage {
     console.log(value);
     var databaseKey;
     var uid;
-    firebase.auth().createUserWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(data => {
-      data.user.updateProfile({
+    firebase.auth().createUserWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(user => {
+      user.user.updateProfile({
         displayName:this.todo.value.fullName,
         photoURL:'./assets/imgs/empty.jpg'
-      });
-
+      }); 
+      userProfileObj.pop();
+      let userProfile = [
+        {username:this.todo.value.fullName,photoURL:'./assets/imgs/empty.jpg'}
+      ]
+      userProfile.forEach(element => {
+        userProfileObj.push(element);
+      })
+      console.log(userProfile)
       console.log(this.todo.value.email);
 
-      uid = data.user.uid;
+      uid = user.user.uid;
 
-      databaseKey = firebase.database().ref('/comm/' + (data.user.uid)).set(
+      databaseKey = firebase.database().ref('/comm/' + (user.user.uid)).set(
         {
           email: this.todo.value.email,
           fullName: this.todo.value.fullName,
@@ -88,14 +95,7 @@ export class RegisterPage {
       ).key;
 
       console.log("Key " + databaseKey)
-      var user = firebase.auth().currentUser;
-      userProfileObj.pop();
-              let userProfile = [
-                {username:user.displayName,photoURL:user.photoURL}
-              ]
-              userProfile.forEach(element => {
-                userProfileObj.push(element);
-              })
+     
      
     },
     error => {
@@ -121,6 +121,8 @@ export class RegisterPage {
       pages.forEach(element => {
         sideMenuObj.push(element)
       })
+     
+    
       this.navCtrl.setRoot(HomePage);
       //this.navCtrl.push(HomePage);
     }
@@ -205,7 +207,7 @@ export class RegisterPage {
       buttons: [
         {
           text: 'OK',
-          handler: data => {
+          handler: user => {
             if (this.userSuccess) {
               this.navCtrl.popToRoot();
             }

@@ -61,6 +61,7 @@ export class SuggestionPage {
         }
         
         this.suggestionList.push({key:element.key, suggestionMsg: element.val().suggestionMsg, reviews: this.likedUsers,dislikes: this.disLikedUsers, postedtime: element.val().postedtime, postedDate: element.val().postedDate,username:element.val().username,profilepic:element.val().profilepic})
+        this.suggestionList.reverse();
         this.likedUsers = [];
         this.disLikedUsers = [];
       });
@@ -104,21 +105,28 @@ export class SuggestionPage {
         // this.suggestionList = [];  
         var suggestionPostRef =  firebase.database().ref('Suggestions/'+suggestion.key);
         var reviewRef = suggestionPostRef.child('reviews/'+this.user.uid);
-        
+        var dislikesRef = suggestionPostRef.child('dislikes/'+this.user.uid);
         
         console.log('Revies == '+suggestion.reviews) 
-        if(suggestion.reviews.length != 0){
+        if(suggestion.reviews.length == 0 || suggestion.reviews.length != 0){
           // this.resultArray = Object.keys(suggestion.reviews)
           // console.log(this.resultArray);
           var userFound : boolean = false;
           suggestion.reviews.forEach(element => {
             if(element == this.user.uid){
               userFound = true;
+              reviewRef.remove();
             }
           });
-
+``
           if(userFound == false){
             reviewRef.set({user:this.user.displayName});
+            suggestion.dislikes.forEach(element => {
+              if(element == this.user.uid){
+                // userFound = true;
+                dislikesRef.remove();
+              }
+            });
           }
 
         }else{
@@ -141,21 +149,35 @@ export class SuggestionPage {
 
       var suggestionPostRef =  firebase.database().ref('Suggestions/'+suggestion.key);
         var dislikesRef = suggestionPostRef.child('dislikes/'+this.user.uid);
-        
+        var reviewRef = suggestionPostRef.child('reviews/'+this.user.uid);  
         
         console.log('Revies == '+suggestion.reviews) 
-        if(suggestion.dislikes.length != 0){
+        if(suggestion.reviews.length == 0 || suggestion.reviews.length != 0){
           // this.resultArray = Object.keys(suggestion.reviews)
           // console.log(this.resultArray);
           var userFound : boolean = false;
           suggestion.dislikes.forEach(element => {
             if(element == this.user.uid){
               userFound = true;
+              dislikesRef.remove();
+              suggestion.reviews.forEach(element => {
+                if(element == this.user.uid){
+                  userFound = true;
+                  reviewRef.remove();
+                }
+              });
             }
           });
 
           if(userFound == false){
             dislikesRef.set({user:this.user.displayName});
+            suggestion.reviews.forEach(element => {
+              if(element == this.user.uid){
+                // userFound = true;
+                reviewRef.remove();
+              }
+            });
+  
           }
 
         }else{

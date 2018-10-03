@@ -1,4 +1,3 @@
-import { firebase } from 'firebase/app';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ActionSheetController,Platform, LoadingController  } from 'ionic-angular';

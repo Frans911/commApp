@@ -25,12 +25,12 @@ export class WelcomePage {
 }
   ionViewDidLoad() {
     console.log('WelcomePage has loaded...');
-    // this.file.createFile('file:///storage/emulated/0/Android/data/io.ionic.starter/cache/','makheApp.doc',true).then((result)=>{
-    //   console.log('Result ');
-    //   console.log(result);
+    this.file.createFile('file:///storage/emulated/0/Android/data/io.ionic.starter/cache/','makheApp.doc',true).then((result)=>{
+      console.log('Result ');
+      console.log(result);
 
 
-    // });
+    });
 
         console.log('inside try');
         this.file.checkFile('file:///storage/emulated/0/Android/data/io.ionic.starter/cache/','makheApp.doc').then((result) => {

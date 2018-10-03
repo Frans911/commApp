@@ -55,7 +55,7 @@
   <!-- The Card -->
   <ion-card style="border-radius: 5px" *ngFor="let feed of feeds" color="alpha" class="ion">
 
-    <ion-item class="clr" color="alphablack">
+    <ion-item class="clr" color="feedbg">
       <ion-avatar item-start>
         <!-- <img src="http://cdn.24.co.za/files/Cms/General/d/6559/{{ data?.articles[0].urlToImage }}.png"> -->
         <img src='./assets/imgs/news24.jpg'>
@@ -64,11 +64,11 @@
       <p><small class="fontC">{{ feed.publishedAt }}</small></p>
     </ion-item>
 
-    <ion-card-content>
+    <ion-card-content class="cardcontent" >
       <ion-row>
         <ion-col align-self-center text-center>
-          <div>
-            <img style="border-radius: 5px" src="{{ feed?.urlToImage }}"  height="250">
+          <div [style.backgroundImage]=" 'url('+feed.urlToImage+')'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 250px;border-radius: 15px"> 
+            <!-- <img  class=”img-responsive” src="{{ feed?.urlToImage }}" > -->
           </div>
         </ion-col>
       </ion-row>

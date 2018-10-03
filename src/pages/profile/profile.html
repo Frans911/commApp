@@ -17,30 +17,29 @@
 <ion-content text-center class="body">
     
         <img src="{{user?.photoURL}}"  style="border-radius: 250px; margin: 15px 0 0 0" height="150" width="150">
-        <ion-icon ios="ios-camera" md="md-camera" name="ios-camera" (click)="updateProfilePic()"></ion-icon>
+        <ion-icon style="font-size:25pt" ios="ios-camera" md="md-camera" name="ios-camera" (click)="updateProfilePic()"></ion-icon>
    <h2 text-center>{{currentUser?.val().fullName}}</h2>
 
    <form [formGroup]="profileForm" (ngSubmit)="updateUserDetails(profileForm)">
-    <ion-list>
+ 
       <ion-item (tap)="tapEvent('fullName')">
         <!-- <h2>Full Name<span style="text-align: right">edit</span></h2> -->
         <!-- <p>{{currentUser?.val().fullName}}</p> -->
-        <ion-label>Full Name</ion-label>
+        <ion-label style="font-size: 10pt;color: white">Full Name</ion-label>
         <ion-input formControlName="fullName" [disabled]="fullNameDisabled" (ionChange)="ionChanger()" value ="{{currentUser?.val().fullName}}" [class.error1]="!profileForm.controls.fullName.valid && profileForm.controls.fullName.dirty"></ion-input>
       </ion-item>
       <ion-item (tap)="tapEvent('Number')">
         <!-- <h2>Phone Number</h2>
         <p>{{currentUser?.val().Number}}</p> -->
-        <ion-label>Full Name</ion-label>
+        <ion-label style="font-size: 10pt;color: white">Contact</ion-label>
         <ion-input formControlName="Number" [disabled]="numberDisabled" (ionChange)="ionChanger()" value ="{{currentUser?.val().Number}}" [class.error1]="!profileForm.controls.Number.valid && profileForm.controls.Number.dirty"></ion-input>
       </ion-item>
       <!--
         
-      -->
-    </ion-list>  
+      --> 
     
 
-    <button ion-button [disabled]="isValid">Save</button>
+    <button class="btnSign" ion-button [disabled]="isValid">Save</button>
   </form>
     <!-- <ion-card style="background: rgba(255, 255, 255, .5);border-radius: 5px">
       <img style="border-radius: 950px;margin: 15px 0 0 0" src="./assets/imgs/logo.jpg" height="150" width="200">

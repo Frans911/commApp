@@ -21,7 +21,7 @@
     <ion-list>
     <ion-item>
        <ion-label style="font-size: 10pt;color: white"  floating> <ion-icon name="person" item-start></ion-icon>Full Names</ion-label>
-       <ion-input type="text" formControlName="fullName" [class.error1]="!todo.controls.fullName.valid && todo.controls.fullName.dirty"></ion-input>
+       <ion-input [(ngModel)]="FullName" type="text" formControlName="fullName" [class.error1]="!todo.controls.fullName.valid && todo.controls.fullName.dirty"></ion-input>
 
        </ion-item>
 
@@ -111,7 +111,7 @@
            
       <ion-item >
         <ion-label style="font-size: 10pt;color: white"  floating> <ion-icon name="mail" item-start></ion-icon>Email</ion-label>
-        <ion-input type= "email" formControlName= "email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty"> Email</ion-input>
+        <ion-input [(ngModel)]="useremail" type= "email" formControlName= "email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty"> Email</ion-input>
       </ion-item>
   
   
@@ -129,7 +129,7 @@
       <ion-item >
           <ion-label style="font-size: 10pt;color: white"  floating> <ion-icon name="key" item-start></ion-icon> Password</ion-label>
           
-          <ion-input type= "password" formControlName="password"  [class.error1]="!todo.controls.password.valid && todo.controls.password.dirty"> Password</ion-input>
+          <ion-input [(ngModel)]="userpassword" type= "password" formControlName="password"  [class.error1]="!todo.controls.password.valid && todo.controls.password.dirty"> Password</ion-input>
       </ion-item>
 
       <ion-item no-lines *ngIf="( todo.get('password').hasError('minlength') || todo.get('password').hasError('maxlength') ||todo.get('password').hasError('required') ) && todo.get('password').touched">

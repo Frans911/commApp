@@ -2,7 +2,7 @@
 
   <ion-content text-center>
     <div *ngFor="let userInfo of userProfile">
-    <img style="border-radius: 300px;margin: 15px 0 0 0" src="{{userInfo.photoURL}}" height="150" width="150"><ion-icon *ngIf = "userInfo.username != 'Community-App'" style="transform:translateY(-35px);transform:translateX(-35px);font-size: 35pt;color:#26C6DA;-webkit-text-stroke:1px #FFC107" name="settings" (click) = "updateProfile()"></ion-icon><br>
+    <img style="border-radius: 300px;margin: 15px 0 0 0" src="{{userInfo.photoURL}}" height="150" width="150"><ion-icon *ngIf = "userInfo.username != 'Community-App'" style="transform:translateY(-35px);transform:translateX(-35px);font-size: 35pt;color:black;background: none" name="settings" (click) = "updateProfile()"></ion-icon><br>
     <p>{{userInfo.username}}</p>
     </div >
    
