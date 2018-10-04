@@ -56,7 +56,7 @@ export class ProfilePage {
     this.currentUser = null;
     if(this.user != null){
       console.log(this.user.uid)
-      firebase.database().ref('comm/'+this.user.uid).on('value', (snapshot) =>{
+      firebase.database().ref('comm/'+this.user.uid).once('value', (snapshot) =>{
         this.currentUser = snapshot;
         console.log(snapshot.val().fullName)
 

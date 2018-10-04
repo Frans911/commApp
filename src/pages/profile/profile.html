@@ -6,9 +6,15 @@
 -->
 <ion-header>
 
-  <ion-navbar text-center color="calm">
-    <ion-icon name="arrow-back"  (click)="backToHome()"  ></ion-icon>
-    <ion-title>My Profile</ion-title>
+  <ion-navbar  color="calm">
+    <ion-row>
+      <ion-col col-1>
+        <ion-icon style="color: grey; font-size: 25px" name="arrow-back"  (click)="backToHome()"  ></ion-icon>
+      </ion-col>
+      <ion-col text-center>
+        <ion-title>My Profile</ion-title>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 
 </ion-header>

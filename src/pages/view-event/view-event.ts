@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, LoadingController, AlertController, Refresher } from 'ionic-angular';
 import { EventDetailsPage } from '../event-details/event-details';
 import { HomePopoverComponent } from '../../components/home-popover/home-popover';
 
@@ -21,6 +21,7 @@ export class ViewEventPage {
   }
 
   ionViewDidLoad() {
+    this.eventsList = [];
     this.getDataFromDB();
     console.log('ionViewDidLoad ViewEventPage');
   }
@@ -29,6 +30,7 @@ export class ViewEventPage {
   }
 
   getDataFromDB(){
+    this.eventsList = [];
     let loading = this.loadingCtrl.create({
       content: 'Loading Events. Please wait...',
       dismissOnPageChange: true
@@ -36,7 +38,7 @@ export class ViewEventPage {
 
     loading.present();
 
-    firebase.database().ref('/Events/').on('value', (snapshot) =>
+    firebase.database().ref('/Events/').once('value', (snapshot) =>
     {
       snapshot.forEach((snap) => 
       { 
@@ -50,6 +52,7 @@ export class ViewEventPage {
        console.log(this.eventsList);
         return false;
       });
+      this.eventsList.reverse();
       this.categoryList = this.eventsList;
     });
 
@@ -57,24 +60,10 @@ export class ViewEventPage {
     loading.dismiss();
   }
 
-  /*search(caterory){
-
-    firebase.database().ref('/fireuploads/').on('value', (snapshot) =>
-    {
-      snapshot.forEach((snap) => 
-      { 
-        //Initializing Item;
-        /*this.item._key = snap.key;
-        this.item.name = snap.val().c_itemName;
-        //Adding Item to itemsList
-        this.eventsList.push({_key : snap.key, EventCategory: snap.val().EventCategory, EventDate: snap.val().EventDate, EventName : snap.val().EventName, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl});
-       console.log(snap.val().downloadUrl);
-        return false;
-      });
-    });
-    console.log("Im here")
-   
-  }*/
+  doRefresh(refresher: Refresher){
+    this.ionViewDidLoad();
+    refresher.complete();
+  }
 
   presentPopover(myEvent) {
     let popover = this.popoverCtrl.create(HomePopoverComponent);
@@ -172,10 +161,14 @@ export class ViewEventPage {
 
   presentAlert(event) {
     console.log(event.downloadUrl);
+    var imageURL = '../../assets/imgs/logo.jpg';
+    if(event.downloadUrl != 'none'){
+      imageURL = event.downloadUrl;
+    }
     let alert = this.alertCtrl.create({
       cssClass: 'imgAlert',
       title: ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+event.EventName,
-      subTitle: '<img src="'+event.downloadUrl+'" width="100%" height="100%" />'+'<br><br>'+event.eventDescp,
+      subTitle: '<img src="'+imageURL+'" width="100%" height="100%" />'+'<br><br>'+event.eventDescp,
       buttons: ['Dismiss']
     });
     alert.present();

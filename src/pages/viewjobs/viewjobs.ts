@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, LoadingController,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, LoadingController,AlertController, Refresher } from 'ionic-angular';
 import { EventDetailsPage } from '../event-details/event-details';
 import { JobspopoverComponent } from '../../components/jobspopover/jobspopover';
 
@@ -28,13 +28,14 @@ export class ViewjobsPage {
   }
 
   getDataFromDB(){
+    this.eventsList = [];
     let loading = this.loadingCtrl.create({
       content: 'Please wait...',
       dismissOnPageChange: true
     });
     loading.present(); 
 
-    firebase.database().ref('/Jobs/').on('value', (snapshot) =>
+    firebase.database().ref('/Jobs/').once('value', (snapshot) =>
     {
       snapshot.forEach((snap) =>
       {
@@ -43,11 +44,17 @@ export class ViewjobsPage {
        console.log(this.eventsList);
         return false;
       });
+      this.eventsList.reverse();
       this.categoryList = this.eventsList;
     });
 
     loading.dismiss();
     console.log(this.eventsList);
+  }
+
+  doRefresh(refresher: Refresher){
+    this.ionViewDidLoad();
+    refresher.complete();
   }
 
   presentPopover(myEvent) {
@@ -188,10 +195,16 @@ export class ViewjobsPage {
         category = 'Other'
         break;
     }
+
+    var imageURL = '../../assets/imgs/logo.jpg';
+    if(event.downloadUrl != 'none'){
+      imageURL = event.downloadUrl;
+    }
+
     let alert = this.alertCtrl.create({
       cssClass: 'imgAlert',
       title: ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+category,
-      subTitle: '<img src="'+event.downloadUrl+'" width="100%" height="100%" />'+'<br><br>'+event.EventName,
+      subTitle: '<img src="'+imageURL+'" width="100%" height="100%" />'+'<br><br>'+event.EventName,
       buttons: ['Dismiss']
     });
     alert.present();
