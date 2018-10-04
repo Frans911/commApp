@@ -54,7 +54,7 @@ export class LoginPage {
 
     let pages = [
       { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
-      { icon: 'clipboard', title: 'Reports', component: 'ListPage' },
+      { icon: 'clipboard', title: 'Reports', component: 'ReportsPage' },
       { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
       { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
       { icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
