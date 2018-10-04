@@ -1,13 +1,11 @@
+import { HomePage } from './../home/home';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ActionSheetController,Platform, LoadingController  } from 'ionic-angular';
-import { sideMenuObj } from '../../models/sideMenuPages.mocks';
-import { HomePage } from '../home/home';
 import { Camera,CameraOptions,PictureSourceType  } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { userProfileObj } from '../../models/userProfile.mocks';
-import { elementAttribute } from '@angular/core/src/render3/instructions';
 
 /**
  * Generated class for the ProfilePage page.
@@ -108,6 +106,7 @@ export class ProfilePage {
   }
 
   updateUserDetails(){
+
     firebase.database().ref('comm/'+this.user.uid).update({fullName:this.profileForm.value.fullName}).then( result =>{
       userProfileObj.pop();
       let profile = [
@@ -116,8 +115,10 @@ export class ProfilePage {
       profile.forEach(element =>{
         userProfileObj.push(element)
       })
+      this.navCtrl.setRoot(HomePage)
     });
-    this.ionViewDidLoad();
+
+    //this.ionViewDidLoad();
   }
 
   backToHome(){

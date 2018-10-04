@@ -63,7 +63,7 @@ export class LoginPage {
    
     firebase.auth().signInWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(user => {
       console.log("works");
-      firebase.database().ref("/comm/").on('value', (snapshot) => {
+      firebase.database().ref("/comm/").once('value', (snapshot) => {
         snapshot.forEach((snap) => {
           if (user.user.uid == snap.key) {
             if (snap.val().role == 'Admin') {
