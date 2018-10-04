@@ -107,7 +107,7 @@ export class ProfilePage {
 
   updateUserDetails(){
 
-    firebase.database().ref('comm/').child(this.user.uid).update({fullName:this.profileForm.value.fullName}).then( result =>{
+    firebase.database().ref('comm/').child(this.user.uid).update({fullName:this.profileForm.value.fullName,Number: this.profileForm.value.Number}).then( result =>{
       userProfileObj.pop();
       /*let profile = [
         {username:this.profileForm.value.fullName,photoURL: this.user.photoURL}
@@ -118,7 +118,7 @@ export class ProfilePage {
 
       firebase.auth().currentUser.updateProfile({
         displayName:this.profileForm.value.fullName,
-        photoURL:'./assets/imgs/empty.jpg'
+        photoURL: this.user.photoURL
       });
 
       let userProfile = [
