@@ -107,13 +107,25 @@ export class ProfilePage {
 
   updateUserDetails(){
 
-    firebase.database().ref('comm/'+this.user.uid).update({fullName:this.profileForm.value.fullName}).then( result =>{
+    firebase.database().ref('comm/').child(this.user.uid).update({fullName:this.profileForm.value.fullName}).then( result =>{
       userProfileObj.pop();
-      let profile = [
+      /*let profile = [
         {username:this.profileForm.value.fullName,photoURL: this.user.photoURL}
       ]
       profile.forEach(element =>{
         userProfileObj.push(element)
+      })*/
+
+      firebase.auth().currentUser.updateProfile({
+        displayName:this.profileForm.value.fullName,
+        photoURL:'./assets/imgs/empty.jpg'
+      });
+
+      let userProfile = [
+        {username: this.profileForm.value.fullName,photoURL: this.user.photoURL}
+      ]
+      userProfile.forEach(element => {
+        userProfileObj.push(element);
       })
       this.navCtrl.setRoot(HomePage)
     });

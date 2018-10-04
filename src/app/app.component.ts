@@ -1,15 +1,6 @@
 
-import { AddjobPage } from './../pages/addjob/addjob';
-import { JobDetailsPage } from './../pages/job-details/job-details';
-import { UserObj } from './../models/loggedInUser.mock';
 import { sideMenuObj } from './../models/sideMenuPages.mocks';
-import { userProfileObj } from './../models/userProfile.mocks'
-import { LoginPage } from './../pages/login/login';
-import { NoaccessPage } from './../pages/noaccess/noaccess';
-import { RegisterPage } from './../pages/register/register';
-import { ViewjobsPage } from './../pages/viewjobs/viewjobs';
-import { WelcomePage } from './../pages/welcome/welcome';
-import { SuggestionPage } from './../pages/suggestion/suggestion';
+import { userProfileObj } from './../models/userProfile.mocks';
 
 import { HomePage } from './../pages/home/home';
 import { Component, ViewChild } from '@angular/core';
@@ -22,14 +13,7 @@ import { Storage } from '@ionic/storage';
 import 'firebase/auth';
 
  declare var firebase;
-// var config = {
-//   apiKey: "AIzaSyAEDVQpkYG4zpOo7ItLnAsstRX4wrKdIcI",
-//   authDomain: "communityapp-bef19.firebaseapp.com",
-//   databaseURL: "https://communityapp-bef19.firebaseio.com",
-//   projectId: "communityapp-bef19",
-//   storageBucket: "communityapp-bef19.appspot.com",
-//   messagingSenderId: "67548252761"
-// };
+
 @Component({
   templateUrl: 'app.html'
 })
