@@ -19,6 +19,7 @@ import { HomePage } from '../pages/home/home';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { JobspopoverComponent } from '../components/jobspopover/jobspopover';
 import { IonicStorageModule } from '@ionic/storage';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 @NgModule({
   declarations: [
@@ -28,13 +29,15 @@ import { IonicStorageModule } from '@ionic/storage';
     JobspopoverComponent,
     FeedComponent
   ],
+
   imports: [
-    
+
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpClientModule
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -42,19 +45,21 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePopoverComponent,
     JobspopoverComponent,
     FeedComponent
-    
+
   ],
+
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    NewsProvider, 
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    NewsProvider,
     InAppBrowser,
     TextToSpeech,
-    
     Camera,
     File,
-    FilePath
+    FilePath,
+    Storage,
+    GooglePlus
   ]
 })
-export class AppModule {}
+export class AppModule { }

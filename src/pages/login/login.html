@@ -4,20 +4,20 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar text-center color="calm" no-border>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-    <ion-title >Sign In</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sign In</ion-title>
   </ion-navbar>
 
-</ion-header>
+</ion-header> -->
 
 
 <ion-content text-center class="body">
-    <!-- <ion-fab text-center bottom>
+  <!-- <ion-fab text-center bottom>
         <button class="fab1" ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
         <ion-fab-list side="left">
           <button   class="fab2" ion-fab (click)= "logInWithFB()"><ion-icon color="fblue" name="logo-facebook"></ion-icon></button>
@@ -26,60 +26,72 @@
        
           </ion-fab-list>
       </ion-fab> -->
-      
-   
+
+
   <img style="border-radius: 350px;margin: 15px 0 0 0" src="../../assets/imgs/logo.jpg" height="150" width="150">
-  <form [formGroup]="todo" >
-               
-    <ion-item >
-      <ion-label style="font-size: 10pt;color: white" floating> <ion-icon  name="mail" item-start></ion-icon>Email</ion-label>
-      <ion-input type= "email" formControlName= "email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty"> Email</ion-input>
+  <form [formGroup]="todo">
+
+    <ion-item>
+      <ion-label style="font-size: 10pt;color: white" floating>
+        <ion-icon name="mail" item-start></ion-icon>Email
+      </ion-label>
+      <ion-input type="email" formControlName="email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty">
+        Email</ion-input>
     </ion-item>
 
 
     <ion-item no-lines *ngIf="( todo.get('email').hasError('minlength') || todo.get('email').hasError('pattern') ||todo.get('email').hasError('required') ) && todo.get('email').touched">
       <div class="error" *ngIf="todo.get('email').hasError('required') && todo.get('email').touched">
-       <p style="font-size: 8pt;color: #F44336">Please input your email</p> 
+        <p style="font-size: 8pt;color: #F44336">Please input your email</p>
       </div>
       <div class="error" *ngIf="todo.get('email').hasError('pattern') && todo.get('email').touched">
-       <p style="font-size: 8pt;color: #F44336" > Email address invalid</p>
+        <p style="font-size: 8pt;color: #F44336"> Email address invalid</p>
       </div>
     </ion-item>
-  
-  
-    <ion-item >
-      <ion-label style="font-size: 10pt;color: white;font-weight: lighter" floating> <ion-icon name="key" item-start></ion-icon> Password</ion-label>
-      
-      <ion-input type= "password" formControlName="password"  [class.error1]="!todo.controls.password.valid && todo.controls.password.dirty"> Password</ion-input>
-  </ion-item>
 
-  <ion-item no-lines *ngIf="( todo.get('password').hasError('minlength') || todo.get('password').hasError('maxlength') ||todo.get('password').hasError('required') ) && todo.get('password').touched">
-    <div class="error" *ngIf="todo.get('password').hasError('required') && todo.get('password').touched">
-      <p style="font-size: 8pt;color: #F44336">Please input your password</p>
-    </div>
-    <div class="error" *ngIf="todo.get('password').hasError('minlength') && todo.get('password').touched">
-     <p style="font-size: 8pt;color: #F44336">Maximum 12 characters</p> Minimum 6 characters
-    </div>
-    <div class="error" *ngIf="todo.get('password').hasError('maxlength') && todo.get('password').touched">
-      <p style="font-size: 8pt;color: #F44336">Maximum 12 characters</p>  
-    </div>
-  </ion-item>
-      </form>   
-      <br><br>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <button class="btnSign"  ion-button (click)="LogIn()" block>Sign In</button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col><br>
-            <!-- <button class="btnSign"  ion-button (click)="SignUp()" block>Sign Up</button> -->
-            <a style="color:whitesmoke" (click)="SignUp()">No account yet? create an account.</a>
-          </ion-col>
-        </ion-row>
-      </ion-grid><br>
-      <a style="color:whitesmoke" (click)="ForgotPassword()">Forgot Password ?</a>
-      <br><br>
-      <div text-center><img src="./assets/imgs/gplus.png" (click)= "logInWithGoogle()" style="border-radius: 365px; height: 90px;"></div>
+
+    <ion-item>
+      <ion-label style="font-size: 10pt;color: white;font-weight: lighter" floating>
+        <ion-icon name="key" item-start></ion-icon> Password
+      </ion-label>
+
+      <ion-input type="password" formControlName="password" [class.error1]="!todo.controls.password.valid && todo.controls.password.dirty">
+        Password</ion-input>
+    </ion-item>
+
+    <ion-item no-lines *ngIf="( todo.get('password').hasError('minlength') || todo.get('password').hasError('maxlength') ||todo.get('password').hasError('required') ) && todo.get('password').touched">
+      <div class="error" *ngIf="todo.get('password').hasError('required') && todo.get('password').touched">
+        <p style="font-size: 8pt;color: #F44336">Please input your password</p>
+      </div>
+      <div class="error" *ngIf="todo.get('password').hasError('minlength') && todo.get('password').touched">
+        <p style="font-size: 8pt;color: #F44336">Maximum 12 characters</p> Minimum 6 characters
+      </div>
+      <div class="error" *ngIf="todo.get('password').hasError('maxlength') && todo.get('password').touched">
+        <p style="font-size: 8pt;color: #F44336">Maximum 12 characters</p>
+      </div>
+    </ion-item>
+  </form>
+  <br><br>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button class="btnSign" ion-button (click)="LogIn()" block>Sign In</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><br>
+        <!-- <button class="btnSign"  ion-button (click)="SignUp()" block>Sign Up</button> -->
+        <a style="color:whitesmoke;box-shadow: 0px 10px 30px 0 rgba(95, 182, 231, 0.8);
+            " (click)="SignUp()">No
+          account yet? create an account.</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid><br>
+  <a style="color:whitesmoke; box-shadow: 0px 10px 30px 0 rgba(95, 182, 231, 0.8);" (click)="ForgotPassword()">Forgot
+    Password ?</a>
+  <br><br>
+  <button style="margin: 0 0 0 155px; box-shadow: 0px 10px 30px 0 rgba(95, 182, 231, 0.8);
+  " ion-fab color="danger" (click)="logInWithGoogle()">
+    <ion-icon name="logo-googleplus"></ion-icon>
+  </button>
 </ion-content>

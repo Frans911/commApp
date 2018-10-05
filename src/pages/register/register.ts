@@ -25,7 +25,7 @@ declare var firebase;
 export class RegisterPage {
   todo: FormGroup;
   userSuccess: false ;
-  constructor(public loadingCtrl:LoadingController, public alertCtrl: AlertController,public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
+  constructor(public storage: Storage, public loadingCtrl:LoadingController, public alertCtrl: AlertController,public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
 
     this.todo = this.formBuilder.group({
       email: ['', Validators.compose([Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
@@ -64,6 +64,7 @@ export class RegisterPage {
     var databaseKey;
     var uid;
     firebase.auth().createUserWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(data => {
+      this.storage.set('activeUser', {email: data.user.email});
       data.user.updateProfile({
         displayName:this.todo.value.fullName,
         photoURL:'./assets/imgs/empty.jpg'
