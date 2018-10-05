@@ -23,7 +23,9 @@ export class JobspopoverComponent {
       {name:'Technical support assistance'},
       {name:'DataBase Administrator'},
       {name:'Accountant'},
-      {name:'Clark'}
+      {name:'Clark'},
+      {name: 'Other'},
+      {name: 'All Jobs'}
     ];
   }
   

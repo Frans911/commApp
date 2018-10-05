@@ -15,6 +15,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 
 import { Storage } from '@ionic/storage';
 import { SuggestionPage } from '../suggestion/suggestion';
+import { ReportsPage } from '../reports/reports';
 
 declare var firebase;
 @IonicPage()
@@ -74,7 +75,7 @@ export class LoginPage {
 
     let pages = [
       { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
-      { icon: 'clipboard', title: 'Reports', component: 'ListPage' },
+      { icon: 'clipboard', title: 'Reports', component: 'ReportsPage' },
       { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
       { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
       { icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
@@ -83,11 +84,12 @@ export class LoginPage {
 
     firebase.auth().signInWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(user => {
       console.log("works");
+
       console.log('user' + user.user.email)
 
       this.storage.set('activeUser', user.user.email);
 
-      firebase.database().ref("/comm/").on('value', (snapshot) => {
+      firebase.database().ref("/comm/").once('value', (snapshot) => {
         snapshot.forEach((snap) => {
           if (user.user.uid == snap.key) {
             if (snap.val().role == 'Admin') {
@@ -99,6 +101,7 @@ export class LoginPage {
               pages.forEach(element => {
                 sideMenuObj.push(element)
               })
+              
               this.navCtrl.setRoot(HomePage);
             } else if (snap.val().role == 'user') {
               this.isUserLoggedIn = true;
@@ -121,6 +124,7 @@ export class LoginPage {
               // let userProfile = [
               //   {username:user.}
               // ]
+              
               this.navCtrl.setRoot(HomePage);
 
             } else {
@@ -142,13 +146,14 @@ export class LoginPage {
     this.toastCtrl.create({ message, duration: 3000 }).present();
   }
 
+
   logInWithGoogle() {
 
-    // let loading = this.loadingCtrl.create({
-    //   content: 'Please wait...',
-    //   dismissOnPageChange: true
-    // });
-    // loading.present();
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      dismissOnPageChange: true
+    });
+    loading.present();
   
     
     //--
@@ -172,10 +177,24 @@ export class LoginPage {
           console.log('Gplus data1 ' + JSON.stringify(data.user.email));
           console.log('Gplus data2 ' + JSON.stringify(data.user.displayName));
           console.log('Gplus data3 ' + JSON.stringify(data.user.photoURL));
+          console.log('Gplus Phone' + JSON.stringify(data.user.phoneNumber));
+
+          firebase.database().ref('/comm/' + (data.user.uid)).set(
+            {
+              email: data.user.email,
+              fullName: data.user.displayName,
+              Number: data.user.phoneNumber,
+              standNumber: '',
+              gender: '',
+              dof: '',
+              address: '',
+              role: "user"
+            }
+          ).key;
           
           let pages = [
             { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
-            { icon: 'clipboard', title: 'Reports', component: 'ListPage' },
+            { icon: 'clipboard', title: 'Reports', component: 'ReportsPage' },
             { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
             { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
             { icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
@@ -194,11 +213,14 @@ export class LoginPage {
           })
           this.navCtrl.setRoot(HomePage);
         
-        }).catch((err) => this.displayToast('Not Logged in'));
-      }, err => this.displayToast(err));
+        }).catch((err) => this.showPopup("Error!", "Please check if your device is connected."));
+      }, err => { 
+        loading.dismiss();
+        this.showPopup("Error!", "Problem Loggin In");});
+       
     }
 
-    //loading.dismiss();
+   
   }
 
   showPopup(title, text) {

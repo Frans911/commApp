@@ -4,6 +4,7 @@ import { Camera,CameraOptions,PictureSourceType  } from '@ionic-native/camera';
 //import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { UserObj } from '../../mocks/loggedInUser.mocks';
 
 declare var firebase
@@ -14,11 +15,7 @@ declare var firebase
   templateUrl: 'addjob.html',
 })
 export class AddjobPage {
-  eventName;
-  eventDate;
-  eventTime;
-  category;
-  eventVenue;
+ 
   selectedImage: string;
 
   fire={
@@ -29,13 +26,17 @@ export class AddjobPage {
   pic_available: boolean;
   //user
   //userObj;
+  jobsForm:FormGroup;
 
-
-  constructor(public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, private camera: Camera/*,private mediaCapture: MediaCapture, */,private platform:Platform,private filePath: FilePath,private f:File) {
-    //this.firebaseUploads = firebase.database().ref('/fireuploads/');
-   // this.firebaseUploads = firebase.database().ref('/fireuploads/');
-   /*console.log("Add Event user ID = "+UserObj[0].authentication_UID);
-   this.userObj = UserObj[0].authentication_UID;*/
+  constructor(public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, private camera: Camera,public formBuilder: FormBuilder,private platform:Platform,private filePath: FilePath,private f:File) {
+    
+    this.jobsForm = this.formBuilder.group({
+      JobDescp: ['', Validators.required],
+      location: ['', Validators.required],
+      closingDate: ['', Validators.required],
+      category: ['',Validators.required]
+      
+    });
 
   }
 
@@ -179,7 +180,7 @@ export class AddjobPage {
           this.fire.downloadUrl = url;
           console.log(url);
           //this.firebaseUploads.push({downloadUrl: url,Admin_Authentication_UID :this.userObj[0].authentication_UID,EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate,EventTime: this.eventTime, EventCategory: this.category});
-          firebase.database().ref('/Jobs/').push({downloadUrl: this.fire.downloadUrl,EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate, EventCategory: this.category});
+          firebase.database().ref('/Jobs/').push({downloadUrl: this.fire.downloadUrl,jobDescp:this.jobsForm.value.JobDescp,location:this.jobsForm.value.location, postClosingDate: this.jobsForm.value.closingDate, JobCategory: this.jobsForm.value.category});
           this.navCtrl.push("ViewjobsPage");
           return this.fire.downloadUrl;
         });
@@ -218,7 +219,7 @@ export class AddjobPage {
     }else{
     //   this.pic_available=false
     //  var noPic = this.pic_available;
-      firebase.database().ref('/Jobs/').push({downloadUrl: "none",EventName:this.eventName,eventVenue:this.eventVenue, EventDate: this.eventDate, EventCategory: this.category});
+    firebase.database().ref('/Jobs/').push({downloadUrl: 'none',jobDescp:this.jobsForm.value.JobDescp,location:this.jobsForm.value.location, postClosingDate: this.jobsForm.value.closingDate, JobCategory: this.jobsForm.value.category});
       this.navCtrl.push("ViewjobsPage");
     }
   }

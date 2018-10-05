@@ -1,7 +1,7 @@
+import { HomePage } from './../home/home';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ActionSheetController,Platform, LoadingController  } from 'ionic-angular';
-import { sideMenuObj } from '../../models/sideMenuPages.mocks';
-import { HomePage } from '../home/home';
 import { Camera,CameraOptions,PictureSourceType  } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
@@ -26,17 +26,37 @@ export class ProfilePage {
   currentUser: any;
   imageURI: string;
 
-  constructor(public loadingCtrl: LoadingController,public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController,private camera: Camera,private platform:Platform,private filePath: FilePath,private f:File) {
+  fullNameDisabled : Boolean; 
+
+  profileForm : FormGroup;
+  isValid: boolean;
+  numberDisabled: boolean;
+
+  constructor(public loadingCtrl: LoadingController,public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController,private camera: Camera,private platform:Platform,private filePath: FilePath,private f:File,  public formBuilder: FormBuilder) {
+    this.isValid = true;
+    this.numberDisabled = true;
+    this.fullNameDisabled = true;
+
+    this.profileForm = this.formBuilder.group({
+      fullName: ['',Validators.compose([Validators.required, Validators.pattern('[A-Za-z]*')])],
+      //'[0-9.e]{10}'
+      //'/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im'
+      Number: ['',Validators.compose([Validators.required, Validators.pattern('[0-9.e]{10}')])]
+    });
+  
   }
 
   ionViewDidLoad() {
-     this.menuCtrl.enable(false, 'myMenu')
+    
+    this.menuCtrl.enable(false, 'myMenu')
 
     this.user = firebase.auth().currentUser;
+    console.log(this.user);
     console.log(this.user.photoURL);
+    this.currentUser = null;
     if(this.user != null){
       console.log(this.user.uid)
-      firebase.database().ref('comm/'+this.user.uid).on('value', (snapshot) =>{
+      firebase.database().ref('comm/'+this.user.uid).once('value', (snapshot) =>{
         this.currentUser = snapshot;
         console.log(snapshot.val().fullName)
 
@@ -57,6 +77,60 @@ export class ProfilePage {
       this.navCtrl.push("LoginPage")
     }
 
+  }
+
+  ionChanger(){
+    console.log(this.profileForm.status)
+    if(this.profileForm.status === 'INVALID'){
+      this.isValid = true;
+    }else if(this.profileForm.status === 'VALID'){
+      this.isValid = false;
+    }
+  }
+
+  tapEvent(type){
+    
+    console.log('type = '+type);
+    switch (type) {
+      case 'fullName':
+        this.fullNameDisabled = false;
+        break;
+      case 'Number':
+        this.numberDisabled = false;
+        break;
+      default:
+        this.numberDisabled = true;
+        this.fullNameDisabled = true;
+        break;
+    }
+  }
+
+  updateUserDetails(){
+
+    firebase.database().ref('comm/').child(this.user.uid).update({fullName:this.profileForm.value.fullName,Number: this.profileForm.value.Number}).then( result =>{
+      userProfileObj.pop();
+      /*let profile = [
+        {username:this.profileForm.value.fullName,photoURL: this.user.photoURL}
+      ]
+      profile.forEach(element =>{
+        userProfileObj.push(element)
+      })*/
+
+      firebase.auth().currentUser.updateProfile({
+        displayName:this.profileForm.value.fullName,
+        photoURL: this.user.photoURL
+      });
+
+      let userProfile = [
+        {username: this.profileForm.value.fullName,photoURL: this.user.photoURL}
+      ]
+      userProfile.forEach(element => {
+        userProfileObj.push(element);
+      })
+      this.navCtrl.setRoot(HomePage)
+    });
+
+    //this.ionViewDidLoad();
   }
 
   backToHome(){

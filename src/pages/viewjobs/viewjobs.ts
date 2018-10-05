@@ -1,9 +1,8 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, LoadingController,AlertController, Refresher } from 'ionic-angular';
 import { EventDetailsPage } from '../event-details/event-details';
-import { HomePopoverComponent } from '../../components/home-popover/home-popover';
-
+import { JobspopoverComponent } from '../../components/jobspopover/jobspopover';
 
  declare var firebase;
 
@@ -16,7 +15,7 @@ export class ViewjobsPage {
   eventsList = [];
   categoryList=[];
 
-  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
+  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController,private alertCtrl: AlertController) {
 
   }
 
@@ -29,25 +28,23 @@ export class ViewjobsPage {
   }
 
   getDataFromDB(){
+    this.eventsList = [];
     let loading = this.loadingCtrl.create({
       content: 'Please wait...',
       dismissOnPageChange: true
     });
     loading.present(); 
 
-    firebase.database().ref('/Jobs/').on('value', (snapshot) =>
+    firebase.database().ref('/Jobs/').once('value', (snapshot) =>
     {
       snapshot.forEach((snap) =>
       {
-        //Initializing Item;
-        /*this.item._key = snap.key;
-        this.item.name = snap.val().c_itemName;*/
-        //Adding Item to itemsList
-        this.eventsList.push({_key : snap.key, EventCategory: snap.val().EventCategory, EventDate: snap.val().EventDate, EventName : snap.val().EventName, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl});
+        this.eventsList.push({_key : snap.key, EventCategory: snap.val().JobCategory, EventDate: snap.val().postClosingDate, EventName : snap.val().jobDescp, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl});
        console.log(snap.val().downloadUrl);
        console.log(this.eventsList);
         return false;
       });
+      this.eventsList.reverse();
       this.categoryList = this.eventsList;
     });
 
@@ -55,34 +52,31 @@ export class ViewjobsPage {
     console.log(this.eventsList);
   }
 
-  /*search(caterory){
-
-    firebase.database().ref('/fireuploads/').on('value', (snapshot) =>
-    {
-      snapshot.forEach((snap) =>
-      {
-        //Initializing Item;
-        /*this.item._key = snap.key;
-        this.item.name = snap.val().c_itemName;
-        //Adding Item to itemsList
-        this.eventsList.push({_key : snap.key, EventCategory: snap.val().EventCategory, EventDate: snap.val().EventDate, EventName : snap.val().EventName, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl});
-       console.log(snap.val().downloadUrl);
-        return false;
-      });
-    });
-    console.log("Im here")
-
-  }*/
+  doRefresh(refresher: Refresher){
+    this.ionViewDidLoad();
+    refresher.complete();
+  }
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(HomePopoverComponent);
+    let popover = this.popoverCtrl.create(JobspopoverComponent);
     popover.present({
      ev: myEvent
     });
 
+    /*
+    {name:''},
+      {name:''},
+      {name:''},
+      {name:''},
+      {name:''},
+      {name:''},
+      {name:''},
+      {name: 'Other'}
+    */
+
     popover.onDidDismiss(popoverData =>{
       try {
-        if(popoverData.name == 'Seminars and Conferences'){
+        if(popoverData.name == 'Freelancer'){
           this.categoryList = [];
 
           for (let event of this.eventsList) {
@@ -91,7 +85,7 @@ export class ViewjobsPage {
 
             }
           }
-        }else if(popoverData.name == 'Trade Shows'){
+        }else if(popoverData.name == 'Plumber'){
           this.categoryList = [];
 
           for (let event of this.eventsList) {
@@ -100,7 +94,7 @@ export class ViewjobsPage {
 
             }
           }
-        }else if(popoverData.name == 'Executive Retreats and Incentive Programs'){
+        }else if(popoverData.name == 'Gardner'){
           this.categoryList = [];
 
           for (let event of this.eventsList) {
@@ -109,7 +103,7 @@ export class ViewjobsPage {
 
             }
           }
-        }else if(popoverData.name == 'Appreciation Events'){
+        }else if(popoverData.name == 'Technical support assistance'){
           this.categoryList = [];
 
           for (let event of this.eventsList) {
@@ -118,7 +112,7 @@ export class ViewjobsPage {
 
             }
           }
-        }else if(popoverData.name == 'Sport Events'){
+        }else if(popoverData.name == 'DataBase Administrator'){
           this.categoryList = [];
 
           for (let event of this.eventsList) {
@@ -127,7 +121,7 @@ export class ViewjobsPage {
 
             }
           }
-        }else if(popoverData.name == 'Product Launch Events'){
+        }else if(popoverData.name == 'Accountant'){
           this.categoryList = [];
 
           for (let event of this.eventsList) {
@@ -136,7 +130,7 @@ export class ViewjobsPage {
 
             }
           }
-        }else if(popoverData.name == 'Entertainment Events'){
+        }else if(popoverData.name == 'Clark'){
           this.categoryList = [];
 
           for (let event of this.eventsList) {
@@ -146,7 +140,17 @@ export class ViewjobsPage {
             }
           }
         }else if(popoverData.name == 'All Jobs'){
-          
+          this.categoryList = [];
+          this.categoryList = this.eventsList;
+        }else if(popoverData.name == 'Other'){
+          this.categoryList = [];
+
+          for (let event of this.eventsList) {
+            if(event.EventCategory == 'other'){
+              this.categoryList.push(event);
+
+            }
+          }
         }
       } catch (error) {
         console.log("No item selected");
@@ -159,6 +163,51 @@ export class ViewjobsPage {
     console.log(event.EventCategory)
 
     this.navCtrl.push("EventDetailsPage",{event:event});
+  }
+
+  presentAlert(event) {
+    console.log(event.downloadUrl);
+    var category: string;
+    switch (event.EventCategory) {
+      case 'sc':
+        category = 'Freelancer';
+        break;
+      case 'ts':
+      category = 'Plumber';
+      break;
+      case 'ei':
+        category = 'Gardner';
+        break;
+      case 'ae':
+        category = 'Technical support assistance';
+        break;
+      case 'se':
+        category = 'DataBase Administrator';
+        break;
+      case 'pe':
+        category = 'Accountant';
+        break;
+      case 'ee':
+        category = 'Clark';
+        break;
+    
+      default:
+        category = 'Other'
+        break;
+    }
+
+    var imageURL = '../../assets/imgs/logo.jpg';
+    if(event.downloadUrl != 'none'){
+      imageURL = event.downloadUrl;
+    }
+
+    let alert = this.alertCtrl.create({
+      cssClass: 'imgAlert',
+      title: ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+category,
+      subTitle: '<img src="'+imageURL+'" width="100%" height="100%" />'+'<br><br>'+event.EventName,
+      buttons: ['Dismiss']
+    });
+    alert.present();
   }
 
 

@@ -91,5 +91,5 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.67548252761-4ra1j7h1lhaf0mlgfegeav90ben6ot01" />
         <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
     </plugin>
-    <engine name="android" spec="7.0.0" />
+    <engine name="android" spec="^7.1.1" />
 </widget>

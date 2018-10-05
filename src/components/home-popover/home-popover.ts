@@ -22,7 +22,8 @@ export class HomePopoverComponent {
       {name:' Appreciation Events'},
       {name:'Sport Events'},
       {name:'Product Launch Events'},
-      {name:'Entertainment Events'}
+      {name:'Entertainment Events'},
+      {name: 'Other'}
     ];
   }
 

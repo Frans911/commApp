@@ -14,10 +14,16 @@
 
 
 <ion-content text-center class="body">
+  
+    <ion-fab right bottom (click)="PostSuggestion()">
+        <button ion-fab class="fab" color="feedheader">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
 <ion-grid>
-  <ion-row>
+  <ion-row > 
     <ion-col>
-      <img src="../../assets/imgs/logo.jpg" height="200" width="200">
+      <img src="../../assets/imgs/chat-bg.png" height="200">
     </ion-col>
   </ion-row>
   <!-- <ion-row>
@@ -65,7 +71,7 @@
 
   <ion-card style="border-radius:5px" *ngFor="let suggestion of suggestionList" color="alpha">
 
-    <ion-item color="alphablack">
+    <ion-item color="feedbg">
       <ion-avatar item-start> 
         <img src="{{suggestion?.profilepic}}"> 
       </ion-avatar>
@@ -102,9 +108,5 @@
 
 </ion-grid>
 
-<ion-fab right bottom (click)="PostSuggestion()">
-    <button ion-fab color="danger">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
+
 </ion-content>

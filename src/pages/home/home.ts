@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 import { NavController, InfiniteScroll, Refresher, MenuController } from 'ionic-angular';
 import moment from 'moment';
 import { UserObj } from '../../models/loggedInUser.mock';
+import { userProfileObj } from '../../models/userProfile.mocks';
 
 declare var firebase;
 
@@ -23,12 +24,14 @@ export class HomePage {
   username : string;
   items = [];
   adminBtn: number = 0;
+  // user = firebase.auth().currentUser;
   constructor(public menuCtrl: MenuController, private inAppBrowser: InAppBrowser, public navCtrl: NavController, private apiData: NewsProvider, private http: HttpClient) {
     // this.timeAgo = moment.utc(this.note.created_at).fromNow();
-
+     
   }
 
   ionViewDidLoad() {
+    
     this.menuCtrl.enable(true, 'myMenu');
     this.loadApi();
     try {
@@ -69,6 +72,7 @@ export class HomePage {
         console.log('HomeePage has loaded.. ');
         this.apiData.getApiData().subscribe(apidata => { 
           this.data = apidata;
+          console.log(this.data);
           //this.feeds.push(this.data);
           for (var i = 0; i < 10; i++) {
             this.feeds.push(this.data.articles[i]);
