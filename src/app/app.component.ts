@@ -1,3 +1,4 @@
+import { WelcomePage } from './../pages/welcome/welcome';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { LoginPage } from './../pages/login/login';
 
@@ -25,7 +26,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
 
-  rootPage: any = HomePage;
+  rootPage: any = 'WelcomePage';
 
   public pages: Array<{ icon: any, title: string, component: any }>;
   public userProfile: Array<{ username: any, photoURL: string }>;
@@ -49,7 +50,7 @@ export class MyApp {
 
         if (loggedUser != null) {
           //this.splashScreen.hide();
-          nvCtrl.nav.setRoot(HomePage);
+         
           this.storage.get('userDetails').then(user => {
             console.log('User-name is: ' + user.username);
             console.log('User-pic is: ' + user.picture);
@@ -76,8 +77,8 @@ export class MyApp {
 
           pages.forEach(element => {
             sideMenuObj.push(element)
-          })
-
+          });
+          nvCtrl.nav.setRoot(HomePage);
         } else {
           nvCtrl.nav.setRoot(HomePage);
           //this.splashScreen.hide();
@@ -116,20 +117,19 @@ export class MyApp {
 
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    if (page.title == "Sign Out") {
-      
 
-      firebase.auth().signOut().then(() => {
-        this.gplus.logout().then(() => {
+    if (page.title == "Sign Out") {
+      this.gplus.logout().then(() => {
+        firebase.auth().signOut().then(() => {
 
           this.storage.remove('activeUser');
-
-          let pages: Array<{ icon: any, title: string, component: any }> = [
-            { icon: 'home', title: 'Home', component: HomePage },
-            { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
-            { icon: 'help', title: 'About', component: 'AboutPage' },
-            { icon: 'log-in', title: 'Sign In', component: 'LoginPage' }
-          ];
+          this.storage.remove('userDetails');
+          // let pages: Array<{ icon: any, title: string, component: any }> = [
+          //   { icon: 'home', title: 'Home', component: HomePage },
+          //   { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
+          //   { icon: 'help', title: 'About', component: 'AboutPage' },
+          //   { icon: 'log-in', title: 'Sign In', component: 'LoginPage' }
+          // ];
           // pages.forEach(element => {
           //   sideMenuObj.push(element)
           //   this.pages = pages;
@@ -149,8 +149,42 @@ export class MyApp {
           sideMenuObj.push({ icon: 'log-in', title: 'Sign In', component: 'LoginPage' })
 
           this.nav.setRoot(page.component);
-        });
-      });
+        }), error => {
+          firebase.auth().signOut().then(() => {
+          this.storage.remove('activeUser');
+          this.storage.remove('userDetails');
+          // let pages: Array<{ icon: any, title: string, component: any }> = [
+          //   { icon: 'home', title: 'Home', component: HomePage },
+          //   { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
+          //   { icon: 'help', title: 'About', component: 'AboutPage' },
+          //   { icon: 'log-in', title: 'Sign In', component: 'LoginPage' }
+          // ];
+          // pages.forEach(element => {
+          //   sideMenuObj.push(element)
+          //   this.pages = pages;
+          // })
+          for (var i = 5; i >= 0; i--) {
+            sideMenuObj.pop();
+          }
+          userProfileObj.pop();
+          let userProfile: Array<{ username: any, photoURL: string }> = [
+            { username: 'Community-App', photoURL: '../assets/imgs/logo.jpg' }
+          ];
+
+          userProfile.forEach(element => {
+            userProfileObj.push(element);
+          })
+          //this.pages = pages;
+          sideMenuObj.push({ icon: 'log-in', title: 'Sign In', component: 'LoginPage' })
+
+          this.nav.setRoot(page.component);
+        })}
+      })
+      
+
+
+
+      //--------
     } else if (page.title == 'About') {
 
       const alert = this.alertCtrl.create({

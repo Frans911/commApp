@@ -72,7 +72,7 @@ export class HomePage {
         console.log('HomeePage has loaded.. ');
         this.apiData.getApiData().subscribe(apidata => { 
           this.data = apidata;
-          console.log(this.data);
+          //console.log(this.data);
           //this.feeds.push(this.data);
           for (var i = 0; i < 10; i++) {
             this.feeds.push(this.data.articles[i]);

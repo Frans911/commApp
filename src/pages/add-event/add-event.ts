@@ -269,8 +269,8 @@ public takePicture(/*sourceType*/) {
 
             let toast = this.toastCtrl.create({
               message: 'Image successfully uploaded.',
-              duration: 3000,
-              position: 'middle',
+              duration: 2000,
+              position: 'bottom',
               
             });
             toast.present();

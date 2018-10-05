@@ -37,10 +37,10 @@
 
     <ion-item>
             <ion-label style="font-size: 10pt;color: white"  floating>  <ion-icon name="transgender" item-start></ion-icon>Gender</ion-label>
-            <ion-select formContolName="gender"  [class.error1]="!todo.controls.gender.valid && todo.controls.gender.dirty">
-              <ion-option value="f">Female</ion-option>
-              <ion-option value="m">Male</ion-option>
-              <ion-option value="tg">Transgender</ion-option>
+            <ion-select type="input" formContolName="gender"  [class.error1]="!todo.controls.gender.valid && todo.controls.gender.dirty">
+              <ion-option value="Female">Female</ion-option>
+              <ion-option value="Male">Male</ion-option>
+              <ion-option value="Transgender">Transgender</ion-option>
             </ion-select>
           </ion-item>
 
@@ -82,22 +82,23 @@
 
       <ion-item>
         <ion-label style="font-size: 10pt;color: white"  floating>  <ion-icon name="navigate" item-start></ion-icon>Address</ion-label>
-        <ion-select formContolName="address"  [class.error1]="!todo.controls.address.valid && todo.controls.address.dirty">
-          <ion-option value="dd">Soshanguve-DD</ion-option>
-          <ion-option value="h">Soshanguve-H</ion-option>
-          <ion-option value="l">Soshanguve-L</ion-option>
-          <ion-option value="jj">Soshanguve-JJ</ion-option>
-          <ion-option value="gg">Soshanguve-GG</ion-option>
-          <ion-option value="ff">Soshanguve-FF</ion-option>
-          <ion-option value="kk">Soshanguve-KK West</ion-option>
-          <ion-option value="x">Soshanguve-X</ion-option>
-          <ion-option value="bb">Soshanguve-BB</ion-option>
-          <ion-option value="pp">Soshanguve-PP west</ion-option>
-          <ion-option value="ss">Soshanguve-SS</ion-option>
-          <ion-option value="c">Soshanguve-C</ion-option>
-          <ion-option value="v">Soshanguve-V</ion-option>
-          <ion-option value="f">Soshanguve-F</ion-option>
-        
+        <ion-select type="input" formContolName="address"  [class.error1]="!todo.controls.address.valid && todo.controls.address.dirty">
+          <ion-option value="Soshanguve-DD">Soshanguve-DD</ion-option>
+          <ion-option value="Soshanguve-H">Soshanguve-H</ion-option>
+          <ion-option value="Soshanguve-L">Soshanguve-L</ion-option>
+          <ion-option value="Soshanguve-JJ">Soshanguve-JJ</ion-option>
+          <ion-option value="Soshanguve-GG">Soshanguve-GG</ion-option>
+          <ion-option value="Soshanguve-FF">Soshanguve-FF</ion-option>
+          <ion-option value="Soshanguve-KK West">Soshanguve-KK West</ion-option>
+          <ion-option value="Soshanguve-X">Soshanguve-X</ion-option>
+          <ion-option value="Soshanguve-BB">Soshanguve-BB</ion-option>
+          <ion-option value="Soshanguve-PP west">Soshanguve-PP west</ion-option>
+          <ion-option value="Soshanguve-SS">Soshanguve-SS</ion-option>
+          <ion-option value="Soshanguve-C">Soshanguve-C</ion-option>
+          <ion-option value="Soshanguve-VV">Soshanguve-VV</ion-option>
+          <ion-option value="Soshanguve-F">Soshanguve-F</ion-option>
+          <ion-option value="Soshanguve-XX">Soshanguve-XX</ion-option>
+          <ion-option value="Soshanguve-LKK">Soshanguve-LKK</ion-option>
         </ion-select>
       </ion-item>
 

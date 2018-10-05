@@ -1,21 +1,13 @@
 import { HomePage } from './../home/home';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, AlertController, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { LoginPage } from '../login/login';
 import { UserObj } from '../../models/loggedInUser.mock';
 import { sideMenuObj } from '../../models/sideMenuPages.mocks';
 import { userProfileObj } from '../../models/userProfile.mocks';
+import { Storage } from '@ionic/storage';
 
-
-
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 declare var firebase;
 @IonicPage()
 @Component({
@@ -24,9 +16,9 @@ declare var firebase;
 })
 export class RegisterPage {
   todo: FormGroup;
-  userSuccess: false ;
-  constructor(public storage: Storage, public loadingCtrl:LoadingController, public alertCtrl: AlertController,public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,private toastCtrl:ToastController) {
-
+  userSuccess: false;
+  constructor(public storage: Storage, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
+  
     this.todo = this.formBuilder.group({
       email: ['', Validators.compose([Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
       password: ['', Validators.compose([Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'), Validators.minLength(6), Validators.required])],
@@ -66,12 +58,12 @@ export class RegisterPage {
     firebase.auth().createUserWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(data => {
       this.storage.set('activeUser', data.user.email);
       data.user.updateProfile({
-        displayName:this.todo.value.fullName,
-        photoURL:'./assets/imgs/empty.jpg'
-      }); 
+        displayName: this.todo.value.fullName,
+        photoURL: './assets/imgs/empty.jpg'
+      });
       userProfileObj.pop();
       let userProfile = [
-        {username:this.todo.value.fullName,photoURL:'./assets/imgs/empty.jpg'}
+        { username: this.todo.value.fullName, photoURL: './assets/imgs/empty.jpg' }
       ]
       userProfile.forEach(element => {
         userProfileObj.push(element);
@@ -95,14 +87,14 @@ export class RegisterPage {
       ).key;
 
       console.log("Key " + databaseKey)
-     
-     
+
+
     },
-    error => {
-      loading.dismiss();
-      this.navCtrl.setRoot("RegisterPage")
-      this.showPopup("Sign-up Error!", "Please fill in all the fields");
-    });
+      error => {
+        loading.dismiss();
+        this.navCtrl.setRoot("RegisterPage")
+        this.showPopup("Sign-up Error!", "Please fill in all the fields");
+      });
 
     if (uid == databaseKey) {
       console.log("Key " + databaseKey)
@@ -121,88 +113,26 @@ export class RegisterPage {
       pages.forEach(element => {
         sideMenuObj.push(element)
       })
-     
-    
+
+
       this.navCtrl.setRoot(HomePage);
       //this.navCtrl.push(HomePage);
     }
 
-    
+
   }
 
 
 
   SignIn() {
 
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push('LoginPage');
   }
 
 
-  logInWithGoogle() {
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...',
-      dismissOnPageChange: true
-    });
-    loading.present();    
-
-
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function (result) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      // ...
-    },
-    error => {
-      loading.dismiss();
-      this.showPopup("Sign-up Error!", "Please fill in all the fields");
-    });
-  
-    // .catch(function (error) {
-    //   // Handle Errors here.
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    //   // The email of the user's account used.
-    //   var email = error.email;
-    //   // The firebase.auth.AuthCredential type that was used.
-    //   var credential = error.credential;
-    //   // ...
-    // });
-
-
-    // firebase.auth().getRedirectResult().then(function (result) {
-    //   if (result.credential) {
-    //     // This gives you a Google Access Token. You can use it to access the Google API.
-    //     var token = result.credential.accessToken;
-    //     // ...
-    //   }
-    //   // The signed-in user info.
-    //   var user = result.user;
-    // },
-    // error => {
-    //   loading.dismiss();
-    //   this.showPopup("Sign-up Error!", "Please fill in all the fields");
-    // });
-  
-    // ).catch(function (error) {
-    //   // Handle Errors here.
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    //   // The email of the user's account used.
-    //   var email = error.email;
-    //   // The firebase.auth.AuthCredential type that was used.
-    //   var credential = error.credential;
-    //   // ...
-    // });
-
-  }
-
-
-  
   showPopup(title, text) {
     let alert = this.alertCtrl.create({
-      title: "<u>"+title+"</u>",
+      title: "<u>" + title + "</u>",
       subTitle: text,
       buttons: [
         {
@@ -218,7 +148,7 @@ export class RegisterPage {
     alert.present();
   }
 
-  
+
   ForgotPassword() {
 
     this.navCtrl.push('ResetPage');

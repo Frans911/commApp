@@ -26,29 +26,30 @@ declare var firebase;
 export class LoginPage {
   //pages: Array<{ icon: any, title: string, component: any }>;
   private todo: FormGroup;
-  isUserLoggedIn: any= false;
+  isUserLoggedIn: any = false;
   provider: any = {};
   userLogged: any = false;
 
-  constructor(public toastCtrl: ToastController, public gplus: GooglePlus, public storage: Storage, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    //
-    firebase.auth().onAuthStateChanged(authData => {
-      if (authData != null) {
-        this.isUserLoggedIn = true;
-        this.provider = authData;
-        this.storage.set('activeUser', JSON.stringify(this.provider.email));
-        // this.navCtrl.push('SuggestionPage');
-        // console.log('Inside Constructor1' + JSON.stringify(authData));
-        // console.log('Inside Constructor2' + JSON.stringify(this.provider.email));
-        // console.log('Inside Constructor2' + JSON.stringify(this.provider.photoUrl));
-        //console.log('Inside Constructor3' + JSON.stringify(authData.email));
-       
-      } else {
-        this.provider = {};
-      }
-    });
+  constructor(public toastCtrl: ToastController, public gplus: GooglePlus, public storage: Storage, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    //--keep this firebase code.//
+    // firebase.auth().onAuthStateChanged(authData => {
+    //   if (authData != null) {
+    //     this.isUserLoggedIn = true;
+    //     this.provider = authData;
+    //     this.storage.set('activeUser', JSON.stringify(this.provider.email));
+    //     // this.navCtrl.push('SuggestionPage');
+    //     // console.log('Inside Constructor1' + JSON.stringify(authData));
+    //     // console.log('Inside Constructor2' + JSON.stringify(this.provider.email));
+    //     // console.log('Inside Constructor2' + JSON.stringify(this.provider.photoUrl));
+    //     //console.log('Inside Constructor3' + JSON.stringify(authData.email));
+
+    //   } else {
+    //     this.provider = {};
+    //   }
+    // });
 
     //===
+
     this.todo = this.formBuilder.group({
       email: ['', Validators.compose([Validators.pattern('^[a-zA-Z_.+-]+@[a-zA-Z-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
       password: ['', Validators.compose([Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'), Validators.minLength(6), Validators.maxLength(12), Validators.required])],
@@ -83,6 +84,7 @@ export class LoginPage {
     ];
 
     firebase.auth().signInWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(user => {
+      this.storage.set('userDetails', { username: user.user.displayName, picture: user.user.photoURL });
       console.log("works");
 
       console.log('user' + user.user.email)
@@ -101,7 +103,7 @@ export class LoginPage {
               pages.forEach(element => {
                 sideMenuObj.push(element)
               })
-              
+
               this.navCtrl.setRoot(HomePage);
             } else if (snap.val().role == 'user') {
               this.isUserLoggedIn = true;
@@ -124,7 +126,7 @@ export class LoginPage {
               // let userProfile = [
               //   {username:user.}
               // ]
-              
+
               this.navCtrl.setRoot(HomePage);
 
             } else {
@@ -154,8 +156,8 @@ export class LoginPage {
       dismissOnPageChange: true
     });
     loading.present();
-  
-    
+
+
     //--
     if (this.platform.is('core')) {
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(gpRes => {
@@ -167,13 +169,14 @@ export class LoginPage {
         'webClientId': '67548252761-4ra1j7h1lhaf0mlgfegeav90ben6ot01.apps.googleusercontent.com',
         'offline': true
       }).then(success => {
-        
+
 
         let credential = firebase.auth.GoogleAuthProvider.credential(success.idToken);
         firebase.auth().signInAndRetrieveDataWithCredential(credential).then(data => {
-          this.storage.set('userDetails', {username: data.user.displayName, picture:data.user.photoURL});
-       
 
+          this.storage.set('userDetails', { username: data.user.displayName, picture: data.user.photoURL });
+
+          this.storage.set('activeUser', data.user.email);
           console.log('Gplus data1 ' + JSON.stringify(data.user.email));
           console.log('Gplus data2 ' + JSON.stringify(data.user.displayName));
           console.log('Gplus data3 ' + JSON.stringify(data.user.photoURL));
@@ -191,7 +194,7 @@ export class LoginPage {
               role: "user"
             }
           ).key;
-          
+
           let pages = [
             { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
             { icon: 'clipboard', title: 'Reports', component: 'ReportsPage' },
@@ -202,25 +205,26 @@ export class LoginPage {
           ];
           sideMenuObj.pop();
           userProfileObj.pop();
-              let userProfile = [
-                { username: data.user.displayName, photoURL: data.user.photoURL }
-              ]
-              userProfile.forEach(element => {
-                userProfileObj.push(element);
-              })
+          let userProfile = [
+            { username: data.user.displayName, photoURL: data.user.photoURL }
+          ]
+          userProfile.forEach(element => {
+            userProfileObj.push(element);
+          })
           pages.forEach(element => {
             sideMenuObj.push(element)
           })
           this.navCtrl.setRoot(HomePage);
-        
+
         }).catch((err) => this.showPopup("Error!", "Please check if your device is connected."));
-      }, err => { 
+      }, err => {
         loading.dismiss();
-        this.showPopup("Error!", "Problem Loggin In");});
-       
+        this.showPopup("Error!", "Problem Loggin In");
+      });
+
     }
 
-   
+
   }
 
   showPopup(title, text) {

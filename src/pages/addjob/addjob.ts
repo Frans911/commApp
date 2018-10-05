@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform, LoadingController, ToastController } from 'ionic-angular';
 import { Camera,CameraOptions,PictureSourceType  } from '@ionic-native/camera';
 //import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file';
@@ -28,7 +28,7 @@ export class AddjobPage {
   //userObj;
   jobsForm:FormGroup;
 
-  constructor(public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, private camera: Camera,public formBuilder: FormBuilder,private platform:Platform,private filePath: FilePath,private f:File) {
+  constructor(private toastCtrl: ToastController,public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, private camera: Camera,public formBuilder: FormBuilder,private platform:Platform,private filePath: FilePath,private f:File) {
     
     this.jobsForm = this.formBuilder.group({
       JobDescp: ['', Validators.required],
@@ -253,7 +253,17 @@ public takePicture(/*sourceType*/) {
            //this.conveImgtoBase64(filePath);
            console.log("file Path =========== "+ filePath)
            this.imageURI = filePath;
-           //this.saveImgToFireStorage();
+           if(filePath != null){
+
+            let toast = this.toastCtrl.create({
+              message: 'Image successfully uploaded.',
+              duration: 2000,
+              position: 'bottom',
+              
+            });
+            toast.present();
+            console.log('inside toast if')
+           }
           });
       } else {
         var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);

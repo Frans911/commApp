@@ -19,7 +19,7 @@
   
      <ion-item >
       <ion-label style="font-size: 10pt;color: white" floating> <ion-icon  name="mail" item-start></ion-icon>Email</ion-label>
-      <ion-input type= "text" formControlName= "email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty"></ion-input>
+      <ion-input type= "email" formControlName= "email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty"></ion-input>
     </ion-item>
 
      <ion-item no-lines *ngIf="( todo.get('email').hasError('minlength') || todo.get('email').hasError('pattern') ||todo.get('email').hasError('required') ) && todo.get('email').touched">
