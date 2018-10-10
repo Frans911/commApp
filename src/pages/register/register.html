@@ -16,11 +16,11 @@
   <ion-content padding class="body" text-center>
     <form [formGroup]="todo" >
   
-      <p>Please fill in the registration form</p>
+      <p style="font-size: 13pt">Please fill in the registration form</p>
   
       <ion-list>
       <ion-item>
-         <ion-label style="font-size: 15pt;color: black"  floating> <ion-icon name="person" item-start></ion-icon>Full Names</ion-label>
+         <ion-label style="font-size: 13pt;color: black"  floating> <ion-icon name="person" item-start></ion-icon>Full Names</ion-label>
          <ion-input [(ngModel)]="FullName" type="text" formControlName="fullName" [class.error1]="!todo.controls.fullName.valid && todo.controls.fullName.dirty"></ion-input>
   
          </ion-item>
@@ -36,7 +36,7 @@
   
   
       <ion-item>
-              <ion-label style="font-size: 10pt;color: white"  floating>  <ion-icon name="transgender" item-start></ion-icon>Gender</ion-label>
+              <ion-label style="font-size: 13pt;color: black"  floating>  <ion-icon name="transgender" item-start></ion-icon>Gender</ion-label>
         
               <ion-select type="input" formControlName="gender">
                 <ion-option value="Female">Female</ion-option>
@@ -54,9 +54,9 @@
   
       
       <ion-item>
-              <ion-input type= "text" formControlName= "dof">  DateOfBirth</ion-input>
+              <!-- <ion-input type= "text" formControlName= "dof">  DateOfBirth</ion-input> -->
              
-              <ion-label style="font-size: 10pt;color: white"  floating>  <ion-icon name="calendar"  item-start></ion-icon> Date Of Birth</ion-label>
+              <ion-label style="font-size: 13pt;color: black"  floating>  <ion-icon name="calendar"  item-start></ion-icon> Date Of Birth</ion-label>
               <ion-datetime displayFormat="MM/DD/YYYY" formControlName="dof"  [class.error1]="!todo.controls.dof.valid && todo.controls.dof.dirty"></ion-datetime>
               </ion-item>
   
@@ -68,7 +68,7 @@
         </ion-item>
              
         <ion-item >
-            <ion-label style="font-size: 10pt;color: white"  floating ><ion-icon name="call" item-start></ion-icon> Contact Number</ion-label>
+            <ion-label style="font-size: 13pt;color: black"  floating ><ion-icon name="call" item-start></ion-icon> Contact Number</ion-label>
             <ion-input type= "number"formControlName= "Number" [class.error1]="!todo.controls.Number.valid && todo.controls.Number.dirty" >PhoneNumber</ion-input>
         </ion-item>
   
@@ -82,7 +82,7 @@
         </ion-item>
   
         <ion-item>
-          <ion-label style="font-size: 10pt;color: white"  floating>  <ion-icon name="navigate" item-start></ion-icon>Address</ion-label>
+          <ion-label style="font-size: 13pt;color: black"  floating>  <ion-icon name="navigate" item-start></ion-icon>Address</ion-label>
           <ion-select type="input" formControlName="address" >
             <ion-option value="Soshanguve-DD">Soshanguve-DD</ion-option>
             <ion-option value="Soshanguve-H">Soshanguve-H</ion-option>
@@ -111,7 +111,7 @@
   
              
         <ion-item >
-          <ion-label style="font-size: 10pt;color: white"  floating> <ion-icon name="mail" item-start></ion-icon>Email</ion-label>
+          <ion-label style="font-size: 13pt;color: black"  floating> <ion-icon name="mail" item-start></ion-icon>Email</ion-label>
           <ion-input [(ngModel)]="useremail" type= "email" formControlName= "email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty"> Email</ion-input>
         </ion-item>
     
@@ -128,7 +128,7 @@
         
   
         <ion-item >
-            <ion-label style="font-size: 10pt;color: white"  floating> <ion-icon name="key" item-start></ion-icon> Password</ion-label>
+            <ion-label style="font-size: 13pt;color: black"  floating> <ion-icon name="key" item-start></ion-icon> Password</ion-label>
             
             <ion-input [(ngModel)]="userpassword" type= "password" formControlName="password"  [class.error1]="!todo.controls.password.valid && todo.controls.password.dirty"> Password</ion-input>
         </ion-item>

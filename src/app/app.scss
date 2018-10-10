@@ -16,6 +16,12 @@
 // automatically applied to the <body> element in the app.
 
 .body{  
+    background: url('../assets/imgs/Appbackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    .error{
+        color: red;
+    }
 }    
 ion-menu{
         ion-content{ 
@@ -28,3 +34,4 @@ ion-menu{
    background: black;
 
 } 
+

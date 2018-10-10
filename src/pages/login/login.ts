@@ -114,7 +114,19 @@ export class LoginPage {
               this.navCtrl.setRoot(HomePage);
             } else if (snap.val().role == 'user') {
               this.isUserLoggedIn = true;
-              this.showPopup("Success", "User succesfully logged  in");
+              //this.showPopup("Success", "User succesfully logged  in");
+              let toast = this.toastCtrl.create({
+                message: 'User succesfully logged  in',
+                duration: 2000,
+                position: 'bottom'
+              });
+            
+              toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+              });
+            
+              toast.present();
+
               UserObj.push({ role: snap.val().role });
 
               sideMenuObj.pop();
@@ -268,6 +280,10 @@ export class LoginPage {
 
   SignUp() {
     this.navCtrl.push('RegisterPage');
+  }
+
+  backBtn(){
+    this.navCtrl.setRoot(HomePage)
   }
 
   ForgotPassword() {

@@ -1,3 +1,4 @@
+import { WelcomePage } from './../pages/welcome/welcome';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { sideMenuObj } from './../models/sideMenuPages.mocks';
 import { userProfileObj } from './../models/userProfile.mocks';
@@ -19,7 +20,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
 
-  rootPage: any = HomePage;
+  rootPage: any = 'WelcomePage';
 
   public pages: Array<{ icon: any, title: string, component: any }>;
   public userProfile: Array<{ username: any, photoURL: string }>;

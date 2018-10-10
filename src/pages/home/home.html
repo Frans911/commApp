@@ -1,27 +1,28 @@
 <ion-header no-border no-shadow no-padding style="margin: 0">
-  <ion-navbar text-center  >
-    <button ion-button menuToggle>
+  <ion-navbar text-center  color="calm">
+    <!-- <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title text-center >Home</ion-title>
-        <div *ngIf = "adminBtn == 2">
-       
-          <!-- <div style="transform: translate(245px,-10px)">{{username}}</div> -->
-        </div>
-      <!-- <span style="transform: translateX(45px)" >
-        Admin
-      </span> -->
-      <div  *ngIf = "adminBtn == 1" (click)="admin()">
-        <ion-title text-cente style="transform: translate(85px,-10px)">Admin</ion-title>
+    </button> -->
+    <!-- <ion-title text-center >Home</ion-title> -->
+        
 
-      </div>
+      <ion-row>
+          <ion-col col-1>
+              <button ion-button menuToggle>
+                  <ion-icon name="menu"></ion-icon>
+              </button>
+          </ion-col>
+          <ion-col text-center>
+              <ion-title >Home</ion-title>
+          </ion-col>
+      </ion-row>
   
   
 </ion-navbar>
  
 </ion-header>
 
-<ion-content padding class="body">
+<ion-content class="body">
   
 
   <!-- The Card -->
@@ -39,7 +40,7 @@
     <ion-card-content class="cardcontent" >
       <ion-row>
         <ion-col align-self-center text-center>
-          <div [style.backgroundImage]=" 'url('+feed.urlToImage+')'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 250px;border-radius: 15px"> 
+          <div [style.backgroundImage]=" 'url('+feed.urlToImage+')'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 250px;"> 
             <!-- <img  class=”img-responsive” src="{{ feed?.urlToImage }}" > -->
           </div>
         </ion-col>

@@ -8,7 +8,7 @@
       <!-- profilr-Logo Default -->
     <img style="border-radius: 250px;margin: 15px 0 0 0" src="{{userInfo.photoURL}}" height="150" width="150"> 
     <ion-icon *ngIf = "userInfo.username != 'Community-App'" style="transform:translateY(-35px);transform:translateX(-35px);font-size: 35pt;color:black;background: none" name="settings" (click) = "updateProfile()"></ion-icon><br>
-    <p>{{userInfo.username}}</p>
+    <p style="font-size: 15pt">{{userInfo.username}}</p>
     </div >
    
     <!-- <img ngIF="signedIn == true" style="border-radius: 300px;margin: 15px 0 0 0" src='{{user?.photoURL}}' alt="not available" height="150" width="150"><ion-icon style="transform:translateY(-35px);transform:translateX(-35px);font-size: 40pt;color:#26C6DA;-webkit-text-stroke:1px black" name="settings"></ion-icon><br> -->
