@@ -26,28 +26,36 @@
 
    <!--(click)="eventDetails(event)"-->
   <ion-card style="background: rgba(255, 255, 255, .5);border-radius: 5px" *ngFor="let event of categoryList" >
-    <img src="{{event?.downloadUrl}}" width="100%"  height="55%"  *ngIf = "event.downloadUrl != 'none'" (click) = "presentAlert(event)"/>
-    <img src="../../assets/imgs/logo.jpg" width="100%" height="55%" *ngIf = "event.downloadUrl == 'none'" (click) = "presentAlert(event)"/>
+    <!-- <img src="{{event?.downloadUrl}}" width="100%"  height="55%"  *ngIf = "event.downloadUrl != 'none'" (click) = "presentAlert(event)"/> -->
+    <div *ngIf = "event.downloadUrl != 'none'" [style.backgroundImage]=" 'url('+event?.downloadUrl+')'" [style.backgroundSize]="'100% 150%'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 180px;border-radius: 5px;margin: 0.5em;" (click) = "presentAlert(event)"> 
+      <!-- <img  class=”img-responsive” src="{{ feed?.urlToImage }}" > -->
+    </div>
+    <div *ngIf = "event.downloadUrl == 'none'" (click) = "presentAlert(event)" [style.backgroundSize]="'100% 100%'"  [style.backgroundImage]=" 'url('+'../../assets/imgs/logo.png'+')'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 170px;border-radius: 5px;margin: 0.5em;"> 
+      <!-- <img  class=”img-responsive” src="{{ feed?.urlToImage }}" > -->
+    </div>
+    <!-- <img src="../../assets/imgs/logo.jpg" width="100%" height="55%" *ngIf = "event.downloadUrl == 'none'" (click) = "presentAlert(event)"/> -->
     <ion-card-content>
       <ion-card-title style="font-weight: bold">
-        {{event?.EventName}}
+        <p style="font-size: 15pt;color: black">{{event?.EventName}} </p>
       </ion-card-title>
       <ion-grid>
         <ion-row>
           <ion-col style="font-weight: bold">
-            Event Date :   {{event?.EventDate}}
+        <p style="color: black;font-weight: lighter">Event Date :   {{event?.EventDate}}</p>   
+        <p style="color: black;font-weight: lighter"> Event Venue :   {{event?.eventVenue}}</p>    
+        <p style="color: black;font-weight: lighter"> Event Time : {{event?.EventTime}}</p> 
           </ion-col>
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
             <ion-col style="font-weight: bold">
-              Event Venue :   {{event?.eventVenue}}
+     
             </ion-col>
           </ion-row>
         <ion-row>
           <ion-col style="font-weight: bold">
-            Event Time : {{event?.EventTime}}
+         
           </ion-col>
-        </ion-row>
+        </ion-row> -->
       </ion-grid>
     </ion-card-content>
   </ion-card>
@@ -61,7 +69,7 @@
   
   <ion-fab right bottom (click)="addEvent()">
     <button ion-fab color="danger">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon style="font-weight: bolder" name="add"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>

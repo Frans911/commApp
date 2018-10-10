@@ -26,7 +26,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
 
-  rootPage: any = 'WelcomePage';
+  rootPage: any = HomePage;
 
   public pages: Array<{ icon: any, title: string, component: any }>;
   public userProfile: Array<{ username: any, photoURL: string }>;

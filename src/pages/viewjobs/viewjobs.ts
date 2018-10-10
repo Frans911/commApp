@@ -39,13 +39,14 @@ export class ViewjobsPage {
     {
       snapshot.forEach((snap) =>
       {
-        this.eventsList.push({_key : snap.key, EventCategory: snap.val().JobCategory, EventDate: snap.val().postClosingDate, EventName : snap.val().jobDescp, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl});
+        this.eventsList.push({_key : snap.key, EventCategory: snap.val().JobCategory, EventDate: snap.val().postClosingDate, EventName : snap.val().jobDescp,JobDetail:snap.val().JobDetail, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl});
        console.log(snap.val().downloadUrl);
-       console.log(this.eventsList);
+       console.log(this.eventsList); 
         return false;
       });
       this.eventsList.reverse();
       this.categoryList = this.eventsList;
+      console.log(this.categoryList)
     });
 
     loading.dismiss();

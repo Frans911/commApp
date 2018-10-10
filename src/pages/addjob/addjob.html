@@ -17,8 +17,12 @@
     <form [formGroup]="jobsForm" (ngSubmit)="saveImgToFireStorage(jobsForm)">
     <ion-list>
       <ion-item>
-        <ion-label style="font-size: 10pt;color: white" floating>Job Descrioption</ion-label>
+        <ion-label style="font-size: 10pt;color: white" floating>Job Title</ion-label>
         <ion-input type="text" formControlName="JobDescp"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-size: 10pt;color: white" floating>Job Description</ion-label>
+        <ion-input type="text" formControlName="JobDetails"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label style="font-size: 10pt;color: white" floating>Location/City</ion-label>

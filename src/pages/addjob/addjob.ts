@@ -34,7 +34,8 @@ export class AddjobPage {
       JobDescp: ['', Validators.required],
       location: ['', Validators.required],
       closingDate: ['', Validators.required],
-      category: ['',Validators.required]
+      category: ['',Validators.required],
+      JobDetails:['',Validators.required]
       
     });
 
@@ -219,7 +220,7 @@ export class AddjobPage {
     }else{
     //   this.pic_available=false
     //  var noPic = this.pic_available;
-    firebase.database().ref('/Jobs/').push({downloadUrl: 'none',jobDescp:this.jobsForm.value.JobDescp,location:this.jobsForm.value.location, postClosingDate: this.jobsForm.value.closingDate, JobCategory: this.jobsForm.value.category});
+    firebase.database().ref('/Jobs/').push({downloadUrl: 'none',jobDescp:this.jobsForm.value.JobDescp,JobDetail:this.jobsForm.value.JobDetails,location:this.jobsForm.value.location, postClosingDate: this.jobsForm.value.closingDate, JobCategory: this.jobsForm.value.category});
       this.navCtrl.push("ViewjobsPage");
     }
   }
