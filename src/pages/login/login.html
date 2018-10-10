@@ -28,11 +28,11 @@
       </ion-fab> -->
 
 
-  <img style="border-radius: 350px;margin: 15px 0 0 0" src="../../assets/imgs/logo.jpg" height="150" width="150">
+  <img style="margin: 15px 0 0 0" src="../../assets/imgs/logo.png" height="150" width="150">
   <form [formGroup]="todo">
 
     <ion-item>
-      <ion-label style="font-size: 10pt;color: white" floating>
+      <ion-label style="font-size: 15px;color: black" floating>
         <ion-icon name="mail" item-start></ion-icon>Email
       </ion-label>
       <ion-input type="email" formControlName="email" [class.error1]="!todo.controls.email.valid && todo.controls.email.dirty">
@@ -51,7 +51,7 @@
 
 
     <ion-item>
-      <ion-label style="font-size: 10pt;color: white;font-weight: lighter" floating>
+      <ion-label style="font-size: 15px;color: black;" floating>
         <ion-icon name="key" item-start></ion-icon> Password
       </ion-label>
 

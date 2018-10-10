@@ -5,7 +5,8 @@
           <img style="height: 30px; width: 30px;" src="./assets/imgs/info2.png" ion-fab (click)="about()">
         </ion-avatar>
     <div *ngFor="let userInfo of userProfile">
-    <img style="border-radius: 300px;margin: 15px 0 0 0" src="{{userInfo.photoURL}}" height="150" width="150">
+      <!-- profilr-Logo Default -->
+    <img style="border-radius: 250px;margin: 15px 0 0 0" src="{{userInfo.photoURL}}" height="150" width="150"> 
     <ion-icon *ngIf = "userInfo.username != 'Community-App'" style="transform:translateY(-35px);transform:translateX(-35px);font-size: 35pt;color:black;background: none" name="settings" (click) = "updateProfile()"></ion-icon><br>
     <p>{{userInfo.username}}</p>
     </div >

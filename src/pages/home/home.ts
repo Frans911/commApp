@@ -33,18 +33,28 @@ export class HomePage {
   ionViewDidLoad() {
     
     this.menuCtrl.enable(true, 'myMenu');
-    this.loadApi();
+    
     try {
-      if (UserObj[0].role == "Admin") {
-        this.adminBtn = 1;
+      if(UserObj.length != 0){
+        console.log('User loged In')
+        if (UserObj[0].role == "Admin") {
+          this.adminBtn = 1;
 
-        this.loadApi();
-      } else if (UserObj[0].role == "user") {
-        
-        this.adminBtn = 2;
+          this.loadApi();
+        } else if (UserObj[0].role == "user") {
+          
+          this.adminBtn = 2;
+          this.loadApi();
+        }
+      }else{
+        console.log('No User loged In')
         this.loadApi();
       }
+      
     } catch (error) {
+      
+        //this.loadApi();
+      
       console.log('catched...');
       //this.navCtrl.setRoot('RegisterPage');
     }

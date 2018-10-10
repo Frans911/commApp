@@ -21,13 +21,13 @@ export class RegisterPage {
   
     this.todo = this.formBuilder.group({
       email: ['', Validators.compose([Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
-      password: ['', Validators.compose([Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'), Validators.minLength(6), Validators.required])],
-
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
       fullName: ['', Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       // Number: ['', Validators.required],
       address: ['', Validators.required],
       Number: ['', Validators.compose([Validators.pattern('[0-9.e]{10}'), Validators.required])],
-      standNumber: ['', Validators.required],
+  
       gender: ['', Validators.required],
       dof: ['', Validators.required],
     });
@@ -68,8 +68,8 @@ export class RegisterPage {
       userProfile.forEach(element => {
         userProfileObj.push(element);
       })
-      console.log(userProfile)
-      console.log(this.todo.value.email);
+      console.log('User profile = '+userProfile)
+      console.log('User email = '+this.todo.value.email);
 
       uid = data.user.uid;
 
@@ -78,7 +78,7 @@ export class RegisterPage {
           email: this.todo.value.email,
           fullName: this.todo.value.fullName,
           Number: this.todo.value.Number,
-          standNumber: this.todo.value.standNumber,
+          //standNumber: this.todo.value.standNumber,
           gender: this.todo.value.gender,
           dof: this.todo.value.dof,
           address: this.todo.value.address,
@@ -86,17 +86,41 @@ export class RegisterPage {
         }
       ).key;
 
+      UserObj.push({ role: "user" });
+      let pages = [
+        { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
+        { icon: 'clipboard', title: 'Reports', component: 'ListPage' },
+        { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
+        { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
+        { icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
+        { icon: 'log-out', title: 'Sign Out', component: HomePage },
+      ];
+      sideMenuObj.pop();
+
+      pages.forEach(element => {
+        sideMenuObj.push(element)
+      })
+
+
+      this.navCtrl.setRoot(HomePage);
+
       console.log("Key " + databaseKey)
 
 
     },
       error => {
+        console.log('inside catch1!! ' +error)
+        loading.dismiss();
+        this.navCtrl.setRoot("RegisterPage")
+        this.showPopup("Sign-up Error!", "The email address is already in use by another account. Please provide different email address.");
+      }).catch(err => {
+        console.log('inside catch2!! ' +err)
         loading.dismiss();
         this.navCtrl.setRoot("RegisterPage")
         this.showPopup("Sign-up Error!", "Please fill in all the fields");
       });
 
-    if (uid == databaseKey) {
+    /*if (uid == databaseKey) {
       console.log("Key " + databaseKey)
       console.log("Key " + uid)
       UserObj.push({ role: "user" });
@@ -117,7 +141,7 @@ export class RegisterPage {
 
       this.navCtrl.setRoot(HomePage);
       //this.navCtrl.push(HomePage);
-    }
+    }*/
 
 
   }

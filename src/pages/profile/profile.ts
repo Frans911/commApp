@@ -38,7 +38,7 @@ export class ProfilePage {
     this.fullNameDisabled = true;
 
     this.profileForm = this.formBuilder.group({
-      fullName: ['',Validators.compose([Validators.required, Validators.pattern('[A-Za-z]*')])],
+      fullName: ['',Validators.compose([Validators.required, Validators.pattern('[A-Za-z]*+ [A-Za-z]*')])],
       //'[0-9.e]{10}'
       //'/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im'
       Number: ['',Validators.compose([Validators.required, Validators.pattern('[0-9.e]{10}')])]
