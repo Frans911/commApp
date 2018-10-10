@@ -55,7 +55,9 @@ export class ReportsPage {
           text: 'Post',
           handler: data => { 
             this.reportsList=[];  
-             firebase.database().ref('Reports/').push({ postedReport: data.Title, postedtime:this.time,username:this.user.displayName,profilepic:this.user.photoURL})
+             firebase.database().ref('Reports/').push({ postedReport: data.Title, postedtime:this.time,username:this.user.displayName,profilepic:this.user.photoURL}).then(result => {
+               this.navCtrl.setRoot('ReportsPage');
+             } )
             }
         }
       ]

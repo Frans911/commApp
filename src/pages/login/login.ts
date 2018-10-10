@@ -75,12 +75,17 @@ export class LoginPage {
     loading.present();
 
     let pages = [
+      
       { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
-      { icon: 'clipboard', title: 'Reports', component: 'ReportsPage' },
+      { icon: 'clipboard', title: 'Announcements', component: 'ReportsPage' },
       { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
       { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
-      { icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
-      { icon: 'log-out', title: 'Sign Out', component: HomePage },
+      
+      //{ icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
+      { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
+      { icon: 'help', title: 'About', component: 'AboutPage' },
+      { icon: 'log-out', title: 'Sign Out', component: HomePage }
+
     ];
 
     firebase.auth().signInWithEmailAndPassword(this.todo.value.email, this.todo.value.password).then(user => {
@@ -99,6 +104,8 @@ export class LoginPage {
               this.showPopup("Success", "Admin succesfully logged in");
               UserObj.push({ role: snap.val().role });
               sideMenuObj.pop();
+              sideMenuObj.pop();
+              sideMenuObj.pop();
               //MyApp.CURRENT_USER = firebase.auth().currentUser;
               pages.forEach(element => {
                 sideMenuObj.push(element)
@@ -107,9 +114,25 @@ export class LoginPage {
               this.navCtrl.setRoot(HomePage);
             } else if (snap.val().role == 'user') {
               this.isUserLoggedIn = true;
-              this.showPopup("Success", "User succesfully logged  in");
+              //this.showPopup("Success", "User succesfully logged  in");
+              let toast = this.toastCtrl.create({
+                message: 'User succesfully logged  in',
+                duration: 2000,
+                position: 'bottom'
+              });
+            
+              toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+              });
+            
+              toast.present();
+
               UserObj.push({ role: snap.val().role });
+
               sideMenuObj.pop();
+              sideMenuObj.pop();
+              sideMenuObj.pop();
+
               userProfileObj.pop();
               let userProfile = [
                 { username: user.user.displayName, photoURL: user.user.photoURL }
@@ -173,14 +196,16 @@ export class LoginPage {
 
         let credential = firebase.auth.GoogleAuthProvider.credential(success.idToken);
         firebase.auth().signInAndRetrieveDataWithCredential(credential).then(data => {
-
-          this.storage.set('userDetails', { username: data.user.displayName, picture: data.user.photoURL });
-
+          
+          this.storage.set('userDetails', { username: data.user.displayName, picture: data.user.photoURL, provider: data.user.providerData[0].providerId });
+          //console.log('DATA ==============' + JSON.stringify(data.user))
+          //console.log('DATA.USER ==============' + JSON.stringify(data))
+          //console.log('DATA.Provider ==============' + JSON.stringify(data.user.providerData[0].providerId))
           this.storage.set('activeUser', data.user.email);
-          console.log('Gplus data1 ' + JSON.stringify(data.user.email));
-          console.log('Gplus data2 ' + JSON.stringify(data.user.displayName));
-          console.log('Gplus data3 ' + JSON.stringify(data.user.photoURL));
-          console.log('Gplus Phone' + JSON.stringify(data.user.phoneNumber));
+          //console.log('Gplus data1 ' + JSON.stringify(data.user.email));
+          //console.log('Gplus data2 ' + JSON.stringify(data.user.displayName));
+          //console.log('Gplus data3 ' + JSON.stringify(data.user.photoURL));
+          //console.log('Gplus Phone' + JSON.stringify(data.user.phoneNumber));
 
           firebase.database().ref('/comm/' + (data.user.uid)).set(
             {
@@ -196,13 +221,21 @@ export class LoginPage {
           ).key;
 
           let pages = [
+            
             { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
-            { icon: 'clipboard', title: 'Reports', component: 'ReportsPage' },
+            { icon: 'clipboard', title: 'Announcements', component: 'ReportsPage' },
             { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
             { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
-            { icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
-            { icon: 'log-out', title: 'Sign Out', component: HomePage },
+            
+            //{ icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
+            { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
+            { icon: 'help', title: 'About', component: 'AboutPage' },
+            { icon: 'log-out', title: 'Logout', component: HomePage }
+
           ];
+
+          sideMenuObj.pop();
+          sideMenuObj.pop();
           sideMenuObj.pop();
           userProfileObj.pop();
           let userProfile = [
@@ -219,7 +252,7 @@ export class LoginPage {
         }).catch((err) => this.showPopup("Error!", "Please check if your device is connected."));
       }, err => {
         loading.dismiss();
-        this.showPopup("Error!", "Problem Loggin In");
+        this.showPopup("Error!", "Please check if your device is connected.");
       });
 
     }
@@ -247,6 +280,10 @@ export class LoginPage {
 
   SignUp() {
     this.navCtrl.push('RegisterPage');
+  }
+
+  backBtn(){
+    this.navCtrl.setRoot(HomePage)
   }
 
   ForgotPassword() {

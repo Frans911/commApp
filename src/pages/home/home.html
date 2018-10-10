@@ -1,59 +1,32 @@
-<ion-header no-border no-shadow>
-  <ion-navbar text-center color="alpha" >
-    <button ion-button menuToggle>
+<ion-header no-border no-shadow no-padding style="margin: 0">
+  <ion-navbar text-center  color="calm">
+    <!-- <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title >Home</ion-title>
-        <div *ngIf = "adminBtn == 2">
-       
-          <!-- <div style="transform: translate(245px,-10px)">{{username}}</div> -->
-        </div>
-      <!-- <span style="transform: translateX(45px)" >
-        Admin
-      </span> -->
-      <div  *ngIf = "adminBtn == 1" (click)="admin()">
-        <ion-title text-cente style="transform: translate(85px,-10px)">Admin</ion-title>
+    </button> -->
+    <!-- <ion-title text-center >Home</ion-title> -->
+        
 
-      </div>
+      <ion-row>
+          <ion-col col-1>
+              <button ion-button menuToggle>
+                  <ion-icon name="menu"></ion-icon>
+              </button>
+          </ion-col>
+          <ion-col text-center>
+              <ion-title >Home</ion-title>
+          </ion-col>
+      </ion-row>
   
   
 </ion-navbar>
  
 </ion-header>
 
-<ion-content padding class="body">
+<ion-content class="body">
   
-  <!-- <ion-list>
-    <ion-item class="list">
-      <strong>Status:</strong> {{ data?.status}}
-      
-    </ion-item>
-
-    <ion-item>
-      <strong>Title:</strong> {{ data?.articles[0].title}}
-    </ion-item>
-    <ion-item>
-      <strong>Date:</strong> {{ data?.articles[0].publishedAt}}
-    </ion-item>
-    <ion-item>
-      <strong>Url:</strong> {{ data?.articles[0].url}} staff reporter. published 25 aug 2018 @ time
-    </ion-item>
-
-    <ion-item>
-      <div class="icon">
-        <img src='http://cdn.24.co.za/files/Cms/General/d/1790/{{ data?.articles[0].urlToImage }}.gif' width="150" height="150">
-      </div>
-    </ion-item>
-  </ion-list> -->
-  <!-- <ion-item>
-    <ion-label floating>URL</ion-label>
-    <ion-input type="url" [(ngModel)]="url"></ion-input>
-  </ion-item>
-
-  <button ion-button block clear (click)="openWebpage(url)">Open Webpage</button> -->
 
   <!-- The Card -->
-  <ion-card style="border-radius: 5px;" *ngFor="let feed of feeds" color="alpha" class="ion">
+  <ion-card style="border-radius: 5px;" *ngFor="let feed of feeds" color="alpha" class="ion" no-padding>
 
     <ion-item class="clr" color="feedbg">
       <ion-avatar item-start>
@@ -67,7 +40,7 @@
     <ion-card-content class="cardcontent" >
       <ion-row>
         <ion-col align-self-center text-center>
-          <div [style.backgroundImage]=" 'url('+feed.urlToImage+')'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 250px;border-radius: 15px"> 
+          <div [style.backgroundImage]=" 'url('+feed.urlToImage+')'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 250px;"> 
             <!-- <img  class=”img-responsive” src="{{ feed?.urlToImage }}" > -->
           </div>
         </ion-col>
@@ -81,16 +54,16 @@
     <ion-row class="padUp">
       <ion-col align-self-center text-center>
         <ion-note>
-          <small style="color: black">By staff reporter</small>
+          <small style="color: black;font-style: italic">By staff reporter</small>
         </ion-note>
       </ion-col>
 
       <ion-col align-self-center text-cente>
-       <ion-note> <small style="color: black">{{ timeAgo }}</small></ion-note>
+       <ion-note> <small style="color: black;font-style: italic">{{ timeAgo }}</small></ion-note>
       </ion-col>
 
       <ion-col>
-        <button ion-button color="primary" clear small icon-start (click)="news24(feed.url)">
+        <button ion-button color="primary" clear small icon-start style="text-transform: lowercase;" (click)="news24(feed.url)">
           <ion-icon name='text'></ion-icon>
           <!-- <a href="{{ feed.url }}">Read more..</a> -->
           read more

@@ -1,8 +1,21 @@
 
 <ion-header>
 
-  <ion-navbar color="calm" text-center>
-    <ion-title>Contact us</ion-title>
+  <ion-navbar color="calm" >
+    <!-- <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Contact us</ion-title> -->
+    <ion-row>
+        <ion-col col-1>
+            <button ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col text-center>
+            <ion-title >Contact us</ion-title>
+        </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +24,7 @@
     <p style="font-weight: bold">Contact us using the form below :</p>
   <form *ngIf="contactus" [formGroup]="contacts"  (onSubmit)="submit()">
     <ion-item>
-        <ion-label style="font-size: 10pt;color: white" floating> <ion-icon  name="person" item-start></ion-icon>Name</ion-label>
+        <ion-label style="font-size: 13pt;color: black" floating> <ion-icon  name="person" item-start></ion-icon>Name</ion-label>
       <ion-input  type="text" formControlName="name"> </ion-input>
     </ion-item>
    
@@ -27,7 +40,7 @@
       </div>
     </ion-item>
     <ion-item>
-        <ion-label style="font-size: 10pt;color: white" floating> <ion-icon  name="mail" item-start></ion-icon>Email</ion-label>
+        <ion-label style="font-size: 13pt;color: black" floating> <ion-icon  name="mail" item-start></ion-icon>Email</ion-label>
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
       <ion-item no-lines *ngIf="( contacts.get('email').hasError('minlength') || contacts.get('email').hasError('pattern') ||contacts.get('email').hasError('required') ) && contacts.get('email').touched">
@@ -42,7 +55,7 @@
         </div>
       </ion-item>
       <ion-item>
-          <ion-label style="font-size: 10pt;color: white" floating> <ion-icon  name="contact" item-start></ion-icon>Contact </ion-label>
+          <ion-label style="font-size: 13pt;color: black" floating> <ion-icon  name="contact" item-start></ion-icon>Contact </ion-label>
           <ion-input type="text" formControlName="contactNo"></ion-input>
         </ion-item>
         <ion-item no-lines *ngIf="( contacts.get('contactNo').hasError('minlength') || contacts.get('contactNo').hasError('pattern') ||contacts.get('contactNo').hasError('required') ) && contacts.get('contactNo').touched">
@@ -57,7 +70,7 @@
           </div>
         </ion-item>
         <ion-item>
-            <ion-label style="font-size: 10pt;color: white" floating> <ion-icon  name="help" item-start></ion-icon>Subject </ion-label>
+            <ion-label style="font-size: 13pt;color: black" floating> <ion-icon  name="help" item-start></ion-icon>Subject </ion-label>
             <ion-input type="text" formControlName="subject"></ion-input>
           </ion-item>
           <ion-item no-lines *ngIf="( contacts.get('subject').hasError('minlength') || contacts.get('subject').hasError('pattern') ||contacts.get('subject').hasError('required') ) && contacts.get('subject').touched">
@@ -72,7 +85,7 @@
             </div>
           </ion-item>
         <ion-item>
-            <textarea  style="border-radius: 5px;width: 100%;background: rgba(255, 255, 255, 0.5);border: none;font-size: 10pt;font-weight: lighter;"   placeholder="Your message..."formControlName="message" cols="120" rows="5"></textarea>
+            <textarea  style="border-radius: 5px;width: 100%;background: rgba(255, 255, 255, 0.5);border: none;font-size: 12pt;font-weight: lighter;"   placeholder="Your message..."formControlName="message" cols="120" rows="5"></textarea>
           </ion-item>
           <ion-item no-lines *ngIf="( contacts.get('message').hasError('minlength') || contacts.get('message').hasError('pattern') ||contacts.get('message').hasError('required') ) && contacts.get('message').touched">
             <div class="error" *ngIf="contacts.get('message').hasError('required') && contacts.get('message').touched ">
