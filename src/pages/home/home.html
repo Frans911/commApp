@@ -1,11 +1,6 @@
 <ion-header no-border no-shadow no-padding style="margin: 0">
   <ion-navbar text-center  color="calm">
-    <!-- <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
-    <!-- <ion-title text-center >Home</ion-title> -->
-        
-
+ 
       <ion-row>
           <ion-col col-1>
               <button ion-button menuToggle>
@@ -34,13 +29,13 @@
         <img src='./assets/imgs/news24.jpg'>
       </ion-avatar>
       <h2>Published by News24</h2>
-      <p><small class="fontC">{{ feed.publishedAt }}</small></p>
+      <p><small class="fontC"><b>{{ feed.publishedAt }}</b></small></p>
     </ion-item>
 
     <ion-card-content class="cardcontent" >
       <ion-row>
         <ion-col align-self-center text-center>
-          <div [style.backgroundImage]=" 'url('+feed.urlToImage+')'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 250px;"> 
+          <div [style.backgroundImage]=" 'url('+feed.urlToImage+')'" style="border-radius: 5px;background-position: center;background-size: cover;background-repeat: no-repeat;height: 250px;"> 
             <!-- <img  class=”img-responsive” src="{{ feed?.urlToImage }}" > -->
           </div>
         </ion-col>
@@ -54,19 +49,19 @@
     <ion-row class="padUp">
       <ion-col align-self-center text-center>
         <ion-note>
-          <small style="color: black;font-style: italic">By staff reporter</small>
+          <small style="color: black;font-style: italic"><b>By staff reporter</b></small>
         </ion-note>
       </ion-col>
 
       <ion-col align-self-center text-cente>
-       <ion-note> <small style="color: black;font-style: italic">{{ timeAgo }}</small></ion-note>
+       <ion-note> <small style="color: black;font-style: italic"><b>{{ timeAgo }}</b></small></ion-note>
       </ion-col>
 
       <ion-col>
         <button ion-button color="primary" clear small icon-start style="text-transform: lowercase;" (click)="news24(feed.url)">
           <ion-icon name='text'></ion-icon>
           <!-- <a href="{{ feed.url }}">Read more..</a> -->
-          read more
+          read more..
         </button>
 
       </ion-col>

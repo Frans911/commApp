@@ -22,8 +22,8 @@
 
 <ion-content text-center class="body">
     
-        <img src="{{user?.photoURL}}"  style="border-radius: 250px; margin: 15px 0 0 0" height="150" width="150">
-        <ion-icon style="font-size:25pt" ios="ios-camera" md="md-camera" name="ios-camera" (click)="updateProfilePic()"></ion-icon>
+        <img src="{{user?.photoURL}}"  style="border-radius: 250px; margin: 15px 0 0 0;" height="150" width="150">
+        <ion-icon style="font-size:25pt; transform:translateX(-35px)" ios="ios-camera" md="md-camera" name="ios-camera" (click)="updateProfilePic()"></ion-icon>
    <h2 text-center>{{currentUser?.val().fullName}}</h2>
 
    <form [formGroup]="profileForm" (ngSubmit)="updateUserDetails(profileForm)">

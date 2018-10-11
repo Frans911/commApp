@@ -1,5 +1,6 @@
+import { ViewEventPage } from './../pages/view-event/view-event';
+import { ViewjobsPage } from './../pages/viewjobs/viewjobs';
 import { AboutPage } from './../pages/about/about';
-import { WelcomePage } from './../pages/welcome/welcome';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { sideMenuObj } from './../models/sideMenuPages.mocks';
 import { userProfileObj } from './../models/userProfile.mocks';
@@ -101,7 +102,7 @@ export class MyApp {
             { icon: 'home', title: 'Home', component: HomePage },
             
             { icon: 'calendar', title: 'Events', component: 'ViewEventPage' },
-            { icon: 'clipboard', title: 'Announcements', component: 'ReportsPage' },
+            { icon: 'clipboard', title: 'Reports', component: 'ReportsPage' },
             { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
             { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
             { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
@@ -127,7 +128,7 @@ export class MyApp {
           sideMenuObj.push({ icon: 'help', title: 'About', component: 'AboutPage' }),
           sideMenuObj.push({ icon: 'log-in', title: 'Sign In', component: 'LoginPage' })
         
-          nvCtrl.nav.setRoot('WelcomePage');
+        nvCtrl.nav.setRoot('WelcomePage');
           //this.splashScreen.hide();
         }
 
