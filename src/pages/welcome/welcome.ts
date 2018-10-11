@@ -25,14 +25,14 @@ export class WelcomePage {
 }
   ionViewDidLoad() {
     console.log('WelcomePage has loaded...');
-    this.file.createFile('file:///storage/emulated/0/Android/data/io.ionic.starter/cache/','makheApp.doc',true).then((result)=>{
-      console.log('Result ');
-      console.log(result);
+    // this.file.createFile('file:///storage/emulated/0/Android/data/io.ionic.starter/cache/','makheApp.doc',true).then((result)=>{
+    //   console.log('Result ');
+    //   console.log(result);
 
 
-    });
+    // });
 
-        console.log('inside try');
+        //console.log('inside try');
         this.file.checkFile('file:///storage/emulated/0/Android/data/io.ionic.starter/cache/','makheApp.doc').then((result) => {
           console.log('result');
           console.log(result);
@@ -42,6 +42,32 @@ export class WelcomePage {
             this.file.createFile('file:///storage/emulated/0/Android/data/io.ionic.starter/cache/','makheApp.doc',false).then((promise)=>{
               console.log('Result ');
               console.log(promise);
+              this.slides = [
+                {
+                  title: "Welcome to the Community App!",
+                  description: "The <b>Community App</b> is meant to unite communities, help find jobs,  share reviews, photos and engage with each other.",
+                  image: "assets/imgs/pic1.jpg",
+                  index: 0,
+                },
+                {
+                  title: "Events!",
+                  description: "All events in one simple overview. In one simple click, members can post an event and see upcoming events.",
+                  image: "assets/imgs/Events.jpg",
+                  index: 1,
+                },
+                {
+                  title: "Hangouts and Social networking",
+                  description: "Community member will share their experience to Facebook and Twitter.",
+                  image: "assets/imgs/pic10.jpg",
+                  index: 2,
+                },
+                {
+                  title: "Share the knowledge",
+                  description: "Share an interesting fact or a great suggestion with all the other members. Let others know what you think by dropping a comment.",
+                  image: "assets/imgs/pic7.jpg",
+                  index: 3,
+                }
+              ];
             });
           }
         }).catch ((error) =>{

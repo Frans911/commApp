@@ -1,9 +1,9 @@
 <ion-menu id="myMenu" [content]="content">
 
   <ion-content text-center>
-      <ion-avatar style="transform: translate(20px, 110px)">
+      <!-- <ion-avatar style="transform: translate(20px, 110px)">
           <img style="height: 30px; width: 30px;" src="./assets/imgs/info2.png" ion-fab (click)="about()">
-        </ion-avatar>
+        </ion-avatar> -->
     <div *ngFor="let userInfo of userProfile">
       <!-- profilr-Logo Default -->
     <img style="border-radius: 250px;margin: 15px 0 0 0" src="{{userInfo.photoURL}}" height="150" width="150"> 

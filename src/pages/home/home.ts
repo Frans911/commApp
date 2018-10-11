@@ -25,7 +25,7 @@ export class HomePage {
   items = [];
   adminBtn: number = 0;
   // user = firebase.auth().currentUser;
-  constructor(public menuCtrl: MenuController, private inAppBrowser: InAppBrowser, public navCtrl: NavController, private apiData: NewsProvider, private http: HttpClient) {
+  constructor(public menuCtrl: MenuController, private inAppBrowser: InAppBrowser, public navCtrl: NavController, public apiData: NewsProvider, private http: HttpClient) {
     // this.timeAgo = moment.utc(this.note.created_at).fromNow();
      
   }
@@ -91,9 +91,6 @@ export class HomePage {
 
             this.data.articles[i].publishedAt = new Date().toDateString().substr(0, 10) + ', ' + nn; 
           }
-        });
-
-        this.apiData.getW().subscribe(apidata => { 
         });
   }
 

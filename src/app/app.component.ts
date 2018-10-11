@@ -1,3 +1,4 @@
+import { AboutPage } from './../pages/about/about';
 import { WelcomePage } from './../pages/welcome/welcome';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { sideMenuObj } from './../models/sideMenuPages.mocks';
@@ -20,7 +21,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
 
-  rootPage: any = HomePage;
+  rootPage: any = '';
 
   public pages: Array<{ icon: any, title: string, component: any }>;
   public userProfile: Array<{ username: any, photoURL: string }>;
@@ -103,8 +104,6 @@ export class MyApp {
             { icon: 'clipboard', title: 'Announcements', component: 'ReportsPage' },
             { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
             { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
-            
-            //{ icon: 'flag', title: 'Report Member', component: 'ReportuserPage' },
             { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
             { icon: 'help', title: 'About', component: 'AboutPage' }
             
@@ -128,7 +127,7 @@ export class MyApp {
           sideMenuObj.push({ icon: 'help', title: 'About', component: 'AboutPage' }),
           sideMenuObj.push({ icon: 'log-in', title: 'Sign In', component: 'LoginPage' })
         
-          nvCtrl.nav.setRoot(HomePage);
+          nvCtrl.nav.setRoot('WelcomePage');
           //this.splashScreen.hide();
         }
 
@@ -153,13 +152,13 @@ export class MyApp {
     this.nav.setRoot("ProfilePage");
   }
 
-  about() {
-    const alert = this.alertCtrl.create({
-      title: '<hr color="blue">About App<hr color="blue">',
-      subTitle: 'The <b>Community App</b> is meant to unite communities, help find jobs,  share reviews, photos and engage with each other.<br><br>-Platform: Android <br>-App version: 1.1.0<hr color="blue"><h3>Support</h3>-makhelwaneapp@gmail.com <br>-Tell no.: (021) 800 723<br><hr color="blue">'
-    });
-    alert.present();
-  }
+  // about() {
+  //   const alert = this.alertCtrl.create({
+  //     title: '<hr color="blue">About App<hr color="blue">',
+  //     subTitle: 'The <b>Community App</b> is meant to unite communities, help find jobs,  share reviews, photos and engage with each other.<br><br>-Platform: Android <br>-App version: 1.1.0<hr color="blue"><h3>Support</h3>-makhelwaneapp@gmail.com <br>-Tell no.: (021) 800 723<br><hr color="blue">'
+  //   });
+  //   alert.present();
+  // }
 
   openPage(page) {
     console.log('inside openPage')
