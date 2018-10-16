@@ -35,21 +35,9 @@ export class MyApp {
   }
 
   initializeApp() {
+    
     this.splashScreen.hide();
     this.platform.ready().then(() => {
-
-      firebase.database().ref('/Events/').once('value', (snapshot) =>
-    {
-      snapshot.forEach((snap) => 
-      { 
-       
-        console.log(snap.val().EventTime)
-        //this.eventsList.push({_key : snap.key, EventCategory: snap.val().EventCategory, EventDate: snap.val().EventDate, EventName : snap.val().EventName, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl, eventDescp:snap.val().eventDescp, eventVenue: snap.val().eventVenue});
-       console.log(snap.val().downloadUrl);
-       //console.log(this.eventsList);
-        return false;
-      });
-    });
 
       var nvCtrl = this;
       this.statusBar.show();

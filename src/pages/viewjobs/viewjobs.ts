@@ -32,6 +32,7 @@ export class ViewjobsPage {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...',
       dismissOnPageChange: true
+     
     });
     loading.present(); 
 

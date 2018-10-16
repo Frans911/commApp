@@ -68,6 +68,12 @@ export class LoginPage {
 
 
   LogIn() {
+
+    
+     
+    
+  
+
     let loading = this.loadingCtrl.create({
       content: 'Please wait...',
       dismissOnPageChange: true
@@ -279,6 +285,13 @@ export class LoginPage {
   }
 
   SignUp() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'ios',
+      content: 'This is the "ios" spinner. It will dismiss after 3 seconds.',
+      duration: 3000
+    });
+
+    loading.present();
     this.navCtrl.push('RegisterPage');
   }
 
