@@ -38,6 +38,19 @@ export class MyApp {
     this.splashScreen.hide();
     this.platform.ready().then(() => {
 
+      firebase.database().ref('/Events/').once('value', (snapshot) =>
+    {
+      snapshot.forEach((snap) => 
+      { 
+       
+        console.log(snap.val().EventTime)
+        //this.eventsList.push({_key : snap.key, EventCategory: snap.val().EventCategory, EventDate: snap.val().EventDate, EventName : snap.val().EventName, EventTime: snap.val().EventTime, downloadUrl: snap.val().downloadUrl, eventDescp:snap.val().eventDescp, eventVenue: snap.val().eventVenue});
+       console.log(snap.val().downloadUrl);
+       //console.log(this.eventsList);
+        return false;
+      });
+    });
+
       var nvCtrl = this;
       this.statusBar.show();
 
@@ -106,7 +119,7 @@ export class MyApp {
             { icon: 'git-network', title: 'Suggestions', component: 'SuggestionPage' },
             { icon: 'globe', title: 'Jobs/Vacancies', component: 'ViewjobsPage' },
             { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
-            { icon: 'help', title: 'About', component: 'AboutPage' }
+            { icon: 'information-circle', title: 'About', component: 'AboutPage' }
             
           ];
 
@@ -125,7 +138,7 @@ export class MyApp {
           nvCtrl.nav.setRoot(HomePage);
         } else {
           sideMenuObj.push({ icon: 'contact', title: 'Contact Us', component: 'ContactusPage' }),
-          sideMenuObj.push({ icon: 'help', title: 'About', component: 'AboutPage' }),
+          sideMenuObj.push({ icon: 'information-circle', title: 'About', component: 'AboutPage' }),
           sideMenuObj.push({ icon: 'log-in', title: 'Sign In', component: 'LoginPage' })
         
         nvCtrl.nav.setRoot('WelcomePage');
@@ -156,7 +169,7 @@ export class MyApp {
   // about() {
   //   const alert = this.alertCtrl.create({
   //     title: '<hr color="blue">About App<hr color="blue">',
-  //     subTitle: 'The <b>Community App</b> is meant to unite communities, help find jobs,  share reviews, photos and engage with each other.<br><br>-Platform: Android <br>-App version: 1.1.0<hr color="blue"><h3>Support</h3>-makhelwaneapp@gmail.com <br>-Tell no.: (021) 800 723<br><hr color="blue">'
+  //     subTitle: 'The <b>Community App</b> is meant to unite communities, information-circle find jobs,  share reviews, photos and engage with each other.<br><br>-Platform: Android <br>-App version: 1.1.0<hr color="blue"><h3>Support</h3>-makhelwaneapp@gmail.com <br>-Tell no.: (021) 800 723<br><hr color="blue">'
   //   });
   //   alert.present();
   // }
@@ -178,7 +191,7 @@ export class MyApp {
         // let pages: Array<{ icon: any, title: string, component: any }> = [
         //   { icon: 'home', title: 'Home', component: HomePage },
         //   { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
-        //   { icon: 'help', title: 'About', component: 'AboutPage' },
+        //   { icon: 'information-circle', title: 'About', component: 'AboutPage' },
         //   { icon: 'log-in', title: 'Sign In', component: 'LoginPage' }
         // ];
         // pages.forEach(element => {
@@ -198,7 +211,7 @@ export class MyApp {
         })
         //this.pages = pages;
         sideMenuObj.push({ icon: 'contact', title: 'Contact Us', component: 'ContactusPage' }),
-        sideMenuObj.push({ icon: 'help', title: 'About', component: 'AboutPage' }),
+        sideMenuObj.push({ icon: 'information-circle', title: 'About', component: 'AboutPage' }),
         sideMenuObj.push({ icon: 'log-in', title: 'Sign In', component: 'LoginPage' })
         
         this.nav.setRoot(page.component);
@@ -237,7 +250,7 @@ export class MyApp {
         // let pages: Array<{ icon: any, title: string, component: any }> = [
         //   { icon: 'home', title: 'Home', component: HomePage },
         //   { icon: 'contact', title: 'Contact Us', component: 'ContactusPage' },
-        //   { icon: 'help', title: 'About', component: 'AboutPage' },
+        //   { icon: 'information-circle', title: 'About', component: 'AboutPage' },
         //   { icon: 'log-in', title: 'Sign In', component: 'LoginPage' }
         // ];
         // pages.forEach(element => {
@@ -258,7 +271,7 @@ export class MyApp {
         })
         //this.pages = pages;
         sideMenuObj.push({ icon: 'contact', title: 'Contact Us', component: 'ContactusPage' }),
-        sideMenuObj.push({ icon: 'help', title: 'About', component: 'AboutPage' }),
+        sideMenuObj.push({ icon: 'information-circle', title: 'About', component: 'AboutPage' }),
         sideMenuObj.push({ icon: 'log-in', title: 'Sign In', component: 'LoginPage' })
 
         this.nav.setRoot(page.component);
@@ -272,7 +285,7 @@ export class MyApp {
 
       const alert = this.alertCtrl.create({
         title: '<hr color="blue">About App<hr color="blue">',
-        subTitle: 'The <b>Community App</b> is meant to unite communities, help find jobs,  share reviews, photos and engage with each other.<br><br>-Platform: Android <br>-App version: 1.1.0<hr color="blue"><h3>Support</h3>-makhelwaneapp@gmail.com <br>-Tell no.: (021) 800 723<br><hr color="blue">'
+        subTitle: 'The <b>Community App</b> is meant to unite communities, information-circle find jobs,  share reviews, photos and engage with each other.<br><br>-Platform: Android <br>-App version: 1.1.0<hr color="blue"><h3>Support</h3>-makhelwaneapp@gmail.com <br>-Tell no.: (021) 800 723<br><hr color="blue">'
 
       });
       alert.present();
