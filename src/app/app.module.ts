@@ -20,6 +20,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { JobspopoverComponent } from '../components/jobspopover/jobspopover';
 import { IonicStorageModule } from '@ionic/storage';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
   ],
 
   imports: [
-
+    IonicImageLoader.forRoot(),
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),

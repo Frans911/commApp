@@ -1,7 +1,6 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, LoadingController,AlertController, Refresher } from 'ionic-angular';
-import { EventDetailsPage } from '../event-details/event-details';
 import { JobspopoverComponent } from '../../components/jobspopover/jobspopover';
 
  declare var firebase;
@@ -23,6 +22,7 @@ export class ViewjobsPage {
     this.getDataFromDB();
     console.log('ionViewDidLoad ViewEventPage');
   }
+
   addEvent(){
     this.navCtrl.push("AddjobPage");
   }

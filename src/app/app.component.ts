@@ -9,7 +9,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { UsersPage } from '../pages/users/users';
 import { Storage } from '@ionic/storage';
 import 'firebase/auth';
 
