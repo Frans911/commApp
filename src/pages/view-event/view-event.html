@@ -24,8 +24,15 @@
 
 <ion-content class="body" text-center>
 
+    <div class="default_msg" *ngIf = "categoryList.length == 0">
+        <img src="../../assets/imgs/Sad_Face_Emoji.png" height="150">
+        <h2>Oops!! We couldn't find what you looking for.</h2>
+        <h3>Be the first one to post.</h3>
+    </div>
+
    <!--(click)="eventDetails(event)"-->
   <ion-card style="background: rgba(255, 255, 255,0.9);border-radius: 5px" *ngFor="let event of categoryList" >
+    
     <!-- <img src="{{event?.downloadUrl}}" width="100%"  height="55%"  *ngIf = "event.downloadUrl != 'none'" (click) = "presentAlert(event)"/> -->
     <div *ngIf = "event.downloadUrl != 'none'" [style.backgroundImage]=" 'url('+event?.downloadUrl+')'" [style.backgroundSize]="'100% 150%'" style="background-position: center;background-size: cover;background-repeat: no-repeat;height: 180px;border-radius: 5px;margin: 0.5em;" (click) = "presentAlert(event)"> 
       <!-- <img  class=”img-responsive” src="{{ feed?.urlToImage }}" > -->

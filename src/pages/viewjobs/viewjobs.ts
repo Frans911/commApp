@@ -30,8 +30,9 @@ export class ViewjobsPage {
   getDataFromDB(){
     this.eventsList = [];
     let loading = this.loadingCtrl.create({
+      duration: 9000,
       content: 'Please wait...',
-      dismissOnPageChange: true
+      //dismissOnPageChange: true
      
     });
     loading.present(); 
@@ -50,7 +51,7 @@ export class ViewjobsPage {
       console.log(this.categoryList)
     });
 
-    loading.dismiss();
+    //loading.dismiss();
     console.log(this.eventsList);
   }
 

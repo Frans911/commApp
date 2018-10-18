@@ -32,8 +32,9 @@ export class ViewEventPage {
   getDataFromDB(){
     this.eventsList = [];
     let loading = this.loadingCtrl.create({
-      content: 'Loading Events. Please wait...',
-      dismissOnPageChange: true
+      duration: 9000,
+      content: 'Getting Events. Please wait...',
+      //dismissOnPageChange: true
     });
 
     loading.present();
@@ -57,7 +58,7 @@ export class ViewEventPage {
     });
 
     console.log(this.eventsList);
-    loading.dismiss();
+    //loading.dismiss();
   }
 
   doRefresh(refresher: Refresher){

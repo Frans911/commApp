@@ -17,8 +17,11 @@
  
 </ion-header>
 
-<ion-content class="body">
-  
+<ion-content class="body" >
+    <div class="default_msg" *ngIf = "showDiv == 0" text-center>
+        <img src="../../assets/imgs/Sad_Face_Emoji.png" height="150">
+        <h2>Oops!! We couldn't find what you looking for.</h2>
+    </div>
 
   <!-- The Card -->
   <ion-card style="border-radius: 5px;" *ngFor="let feed of feeds" color="alpha" class="ion" no-padding>
